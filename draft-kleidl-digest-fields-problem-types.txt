@@ -63,15 +63,62 @@ Table of Contents
 
    1.  Introduction
    2.  Conventions and Definitions
-   3.  Security Considerations
-   4.  IANA Considerations
-   5.  Normative References
+   3.  Problem Types
+     3.1.  Unsupported Hashing Algorithm
+   4.  Security Considerations
+   5.  IANA Considerations
+   6.  Normative References
    Acknowledgments
    Author's Address
 
 1.  Introduction
 
    TODO Introduction
+
+   Digest fields [DIGEST] are HTTP fields that support integrity
+   digests.  A request can include the Content-Digest and Repr-Digest
+   header fields for verifying the integrity of the HTTP message content
+   and the HTTP representation, respectively.  In addition, a sender can
+   include the Want-Content-Digest and Want-Repr-Digest header fields in
+   a request to express interest in receiving integrity field in the
+   response.  [RFC9530] by design does not define, require or recommend
+   specific resource behavior if errors regarding the integrity appear.
+
+   For example, a request may include a digest algorithm in the Content-
+   Digest and Repr-Digest header fields that the resource does not
+   support.  Similar, a sender may request to the digest utilizing a
+   hashing algorithm that the resource does not support.  Another
+   possible problem is that the digest supplied in the request does not
+   match up with the digest calculated by the resource.  Depending on
+   the application, the resource may choose to ignore these errors or
+   communicate them back to the client.  However, no recommended
+   response format for communicating these error is defined so far.
+
+   Problem types [PROBLEM] are machine-readable description of errors in
+   HTTP response content [PROBLEM].  Each problem definition includes a
+   unique type that can be used to identify the error and also allows
+   the attachment of a short, human-readable summary as well as
+   additional properties to aid debugging and error handling.  In
+   addition, a JSON and XML representation of the problem types is
+   defined to simplify parsing.
+
+   As an example, if the resource receives a request with an integrity
+   field utilizing an unsupported hashing algorithm foo, the response
+   may use the following problem type:
+
+   HTTP/1.1 400 Bad Request
+   Content-Type: application/problem+json
+
+   {
+     "type": "https://iana.org/assignments/http-problem-types#unsupported-hashing-algorithm",
+     "title": "upload is already completed",
+     "requested-algorithm": "foo",
+     "supported-algorithms": ["sha-256", "sha-512"]
+   }
+
+   The response includes the unique problem type, the requested
+   algorithm that is not supported by the resource, as well as an array
+   of the supported algorithms.
 
 2.  Conventions and Definitions
 
@@ -81,15 +128,73 @@ Table of Contents
    BCP 14 [RFC2119] [RFC8174] when, and only when, they appear in all
    capitals, as shown here.
 
-3.  Security Considerations
+   The terms "integrity fields" and "integrity preference fields" are
+   from [DIGEST].
 
-   TODO Security
+3.  Problem Types
 
-4.  IANA Considerations
+3.1.  Unsupported Hashing Algorithm
 
-   This document has no IANA actions.
+   This section defines the https://iana.org/assignments/http-problem-
+   types#unsupported-hashing-algorithm problem type [PROBLEM].  A
+   resource MAY use this problem type in a response to a request, whose
+   integrity or integrity preference fields reference a hashing
+   algorithm that the resource can not or does not want to support for
+   this request, and if the resource wants to indicate this problem to
+   the sender.
 
-5.  Normative References
+   The resource SHOULD provide the algorithm key of the unsupported
+   algorithm in the unsupported-algorithm member and an array of the
+   supported algorithms in the supported-algorithm member.  The value of
+   this array are algorithm keys as registered in the "Hash Algorithms
+   for HTTP Digest Fields" registry.
+
+   The following example shows a response for a request with an
+   integrity field utilizing an unsupported hashing algorithm foo.  The
+   response also includes a list of supported algorithms.
+
+   HTTP/1.1 400 Bad Request
+   Content-Type: application/problem+json
+
+   {
+     "type": "https://iana.org/assignments/http-problem-types#unsupported-hashing-algorithm",
+     "title": "upload is already completed",
+     "unsupported-algorithm": "foo",
+     "supported-algorithms": ["sha-256", "sha-512"]
+   }
+
+4.  Security Considerations
+
+   Although an error appeared while handling the digest fields, the
+   resource may choose to not disclose this error to the sender to avoid
+   lacking implementation details.  Similar, the resource may choose a
+   general problem type for the response even in a more specific problem
+   type is defined if it prefers to hide the details of the error from
+   the sender.
+
+5.  IANA Considerations
+
+   IANA is asked to register the following entry in the "HTTP Problem
+   Types" registry:
+
+   Type URI:  https://iana.org/assignments/http-problem-
+      types#unsupported-hashing-algorithm Title:
+
+      Unsupported Hashing Algorithm Recommended HTTP status code:
+
+      400 Reference:
+
+      This document
+
+6.  Normative References
+
+   [DIGEST]   Polli, R. and L. Pardue, "Digest Fields", RFC 9530,
+              DOI 10.17487/RFC9530, February 2024,
+              <https://www.rfc-editor.org/rfc/rfc9530>.
+
+   [PROBLEM]  Nottingham, M., Wilde, E., and S. Dalal, "Problem Details
+              for HTTP APIs", RFC 9457, DOI 10.17487/RFC9457, July 2023,
+              <https://www.rfc-editor.org/rfc/rfc9457>.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -99,6 +204,10 @@ Table of Contents
    [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
+
+   [RFC9530]  Polli, R. and L. Pardue, "Digest Fields", RFC 9530,
+              DOI 10.17487/RFC9530, February 2024,
+              <https://www.rfc-editor.org/rfc/rfc9530>.
 
 Acknowledgments
 
