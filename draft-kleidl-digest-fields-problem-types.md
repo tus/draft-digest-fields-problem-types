@@ -79,7 +79,7 @@ The terms "integrity fields" and "integrity preference fields" are from {{DIGEST
 
 This section defines the "https://iana.org/assignments/http-problem-types#unsupported-hashing-algorithm" problem type {{PROBLEM}}. A server MAY use this problem type when responding to a request, whose integrity or integrity preference fields reference a hashing algorithm that the server can not or does not want to support for this request, and if the server wants to indicate this problem to the sender.
 
-The server SHOULD provide the algorithm key of the unsupported algorithm in the `unsupported-algorithm` member and an array of the supported algorithms in the `supported-algorithm` member. The value of this array are algorithm keys as registered in the "Hash Algorithms for HTTP Digest Fields" registry.
+Two problem type extension members are defined: the `unsupported-algorithm` and `supported-algorithms` members. A response using this problem type SHOULD populate both members, with the value of `unsupported-algorithm` being the algorithm key of the unsupported algorithm from the request and the value of `supported-algorithms` being an array of the algorithm keys, as registered in the "Hash Algorithms for HTTP Digest Fields" registry, of the supported algorithms.
 
 The following example shows a response for a request with an integrity field utilizing an unsupported hashing algorithm `foo`. The response also includes a list of supported algorithms.
 
@@ -121,7 +121,7 @@ If the sender receives this problem type, it SHOULD NOT retry the request withou
 
 This section defines the "https://iana.org/assignments/http-problem-types#mismatching-digest-value" problem type {{PROBLEM}}. A server MAY use this problem type when responding to a request, whose integrity fields include a digest value that does not match the digest value that the server computed for the request content or representation.
 
-The server SHOULD provide the algorithm key of the used hashing algorithm in the `algorithm` member, the digest value from the request's integrity fields in the `provided-digest` member, and the computed digest value in the `expected-digest` member. The digest values MUST BE serialized as byte sequences as described in {{Section 4.1.8 of STRUCTURED-FIELDS}}.
+Three problem type extension members are defined: the `algorithm`, `provided-digest`, and `expected-digest` members. A response using this problem type SHOULD populate all members, with the value of `algorithm` being the algorithm key of the used hashing algorithm, with the value of `provided-digest` being the digest value taken from the request's integrity fields, and the value of `expected-digest` being the computed digest. The digest values MUST BE serialized as byte sequences as described in {{Section 4.1.8 of STRUCTURED-FIELDS}}.
 
 The following example shows a response for a request with a mismatching SHA-256 digest value.
 
