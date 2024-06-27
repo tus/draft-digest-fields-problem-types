@@ -45,9 +45,9 @@ TODO Abstract
 
 # Introduction
 
-Digest fields {{DIGEST}} are HTTP fields that support integrity digests. A request can include the `Content-Digest` and `Repr-Digest` header fields for verifying the integrity of the HTTP message content and the HTTP representation, respectively. In addition, a sender can include the `Want-Content-Digest` and `Want-Repr-Digest` header fields in a request to express interest in receiving integrity field in the response. {{DIGEST}} by design does not define, require or recommend specific resource behavior if errors regarding the integrity appear.
+Digest fields {{DIGEST}} are HTTP fields that support integrity digests. A request can include the `Content-Digest` and `Repr-Digest` header fields for verifying the integrity of the HTTP message content and the HTTP representation, respectively. In addition, a sender can include the `Want-Content-Digest` and `Want-Repr-Digest` header fields in a request to express interest in receiving integrity field in the response. {{DIGEST}} by design does not define, require or recommend specific server behavior if errors regarding the integrity appear.
 
-For example, a request may include a digest algorithm in the `Content-Digest` and `Repr-Digest` header fields that the resource does not support. Similar, a sender may request to the digest utilizing a hashing algorithm that the resource does not support. Another possible problem is that the digest supplied in the request does not match up with the digest calculated by the resource. Depending on the application, the resource may choose to ignore these errors or communicate them back to the client. However, no recommended response format for communicating these error is defined so far.
+For example, a request may include a digest algorithm in the `Content-Digest` and `Repr-Digest` header fields that the server does not support. Similar, a sender may request to the digest utilizing a hashing algorithm that the server does not support. Another possible problem is that the digest supplied in the request does not match up with the digest calculated by the server. Depending on the application, the server may choose to ignore these errors or communicate them back to the client. However, no recommended response format for communicating these errors is defined so far.
 
 Problem types {{PROBLEM}} are machine-readable description of errors in HTTP response content {{PROBLEM}}. Each problem definition includes a unique type that can be used to identify the error and also allows the attachment of a short, human-readable summary as well as additional properties to aid debugging and error handling. In addition, a JSON and XML representation of the problem types is defined to simplify parsing.
 
@@ -65,7 +65,7 @@ Content-Type: application/problem+json
 }
 ~~~
 
-The response includes the unique problem type, the requested algorithm that is not supported by the resource, as well as an array of the supported algorithms.
+The response includes the unique problem type, the requested algorithm that is not supported by the server, as well as an array of the supported algorithms.
 
 # Conventions and Definitions
 
@@ -77,9 +77,9 @@ The terms "integrity fields" and "integrity preference fields" are from {{DIGEST
 
 ## Unsupported Hashing Algorithm
 
-This section defines the "https://iana.org/assignments/http-problem-types#unsupported-hashing-algorithm" problem type {{PROBLEM}}. A resource MAY use this problem type in a response to a request, whose integrity or integrity preference fields reference a hashing algorithm that the resource can not or does not want to support for this request, and if the resource wants to indicate this problem to the sender.
+This section defines the "https://iana.org/assignments/http-problem-types#unsupported-hashing-algorithm" problem type {{PROBLEM}}. A server MAY use this problem type in a response to a request, whose integrity or integrity preference fields reference a hashing algorithm that the server can not or does not want to support for this request, and if the server wants to indicate this problem to the sender.
 
-The resource SHOULD provide the algorithm key of the unsupported algorithm in the `unsupported-algorithm` member and an array of the supported algorithms in the `supported-algorithm` member. The value of this array are algorithm keys as registered in the "Hash Algorithms for HTTP Digest Fields" registry.
+The server SHOULD provide the algorithm key of the unsupported algorithm in the `unsupported-algorithm` member and an array of the supported algorithms in the `supported-algorithm` member. The value of this array are algorithm keys as registered in the "Hash Algorithms for HTTP Digest Fields" registry.
 
 The following example shows a response for a request with an integrity field utilizing an unsupported hashing algorithm `foo`. The response also includes a list of supported algorithms.
 
@@ -99,9 +99,9 @@ If the sender receives this problem type, it SHOULD retry the request while pick
 
 ## Invalid Digest Value
 
-This section defines the "https://iana.org/assignments/http-problem-types#invalid-digest-value" problem type {{PROBLEM}}. A resource MAY use this problem type in a response to a request, whose integrity fields include a digest value, that cannot be generated by the corresponding hashing algorithm. For example, if the digest value of the `sha-512` hashing algorithm is not 64 bytes long, it cannot be a valid digest value and the resource can skip computing the digest value. This problem type MUST NOT be used if the resource is not able to parse the integrity fields according to {{Section 4.5 of STRUCTURED-FIELDS}}, for example because of a syntax error in the field value.
+This section defines the "https://iana.org/assignments/http-problem-types#invalid-digest-value" problem type {{PROBLEM}}. A server MAY use this problem type in a response to a request, whose integrity fields include a digest value, that cannot be generated by the corresponding hashing algorithm. For example, if the digest value of the `sha-512` hashing algorithm is not 64 bytes long, it cannot be a valid digest value and the server can skip computing the digest value. This problem type MUST NOT be used if the server is not able to parse the integrity fields according to {{Section 4.5 of STRUCTURED-FIELDS}}, for example because of a syntax error in the field value.
 
-The resource SHOULD a human-readable description why the value is considered invalid in the `title` member.
+The server SHOULD include a human-readable description why the value is considered invalid in the `title` member.
 
 The following example shows a response for a request with an invalid digest value.
 
@@ -119,9 +119,9 @@ If the sender receives this problem type, it SHOULD NOT retry the request withou
 
 ## Mismatching Digest Value
 
-This section defines the "https://iana.org/assignments/http-problem-types#mismatching-digest-value" problem type {{PROBLEM}}. A resource MAY use this problem type in a response to a request, whose integrity fields include a digest value that does not match the digest value that the resource computed for the request content or representation.
+This section defines the "https://iana.org/assignments/http-problem-types#mismatching-digest-value" problem type {{PROBLEM}}. A server MAY use this problem type in a response to a request, whose integrity fields include a digest value that does not match the digest value that the server computed for the request content or representation.
 
-The resource SHOULD provide the algorithm key of the used hashing algorithm in the `algorithm` member, the digest value from the request's integrity fields in the `provided-digest` member, and the computed digest value in the `expected-digest` member. The digest values MUST BE serialized as byte sequences as described in {{Section 4.1.8 of STRUCTURED-FIELDS}}.
+The server SHOULD provide the algorithm key of the used hashing algorithm in the `algorithm` member, the digest value from the request's integrity fields in the `provided-digest` member, and the computed digest value in the `expected-digest` member. The digest values MUST BE serialized as byte sequences as described in {{Section 4.1.8 of STRUCTURED-FIELDS}}.
 
 The following example shows a response for a request with a mismatching SHA-256 digest value.
 
@@ -142,7 +142,7 @@ If the sender receives this problem type, the request might be modified unintent
 
 # Security Considerations
 
-Although an error appeared while handling the digest fields, the resource may choose to not disclose this error to the sender to avoid lacking implementation details. Similar, the resource may choose a general problem type for the response even in a more specific problem type is defined if it prefers to hide the details of the error from the sender.
+Although an error appeared while handling the digest fields, the server may choose to not disclose this error to the sender to avoid lacking implementation details. Similar, the server may choose a general problem type for the response even in a more specific problem type is defined if it prefers to hide the details of the error from the sender.
 
 # IANA Considerations
 
