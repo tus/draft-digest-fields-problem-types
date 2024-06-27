@@ -117,6 +117,29 @@ Content-Type: application/problem+json
 
 If the sender receives this problem type, it SHOULD NOT retry the request without modification. Such an error is likely rooted in a fault in the sender's computation or encoding of the digest value.
 
+## Mismatching Digest Value
+
+This section defines the `https://iana.org/assignments/http-problem-types#mismatching-digest-value` problem type {{PROBLEM}}. A resource MAY use this problem type in a response to a request, whose integrity fields include a digest value that does not match the digest value that the resource computed for the request content or representation.
+
+The resource SHOULD provide the algorithm key of the used hashing algorithm in the `algorithm` member, the digest value from the request's integrity fields in the `provided-digest` member, and the computed digest value in the `expected-digest` member. The digest values MUST BE serialized as byte sequences as described in {{Section 4.1.8 of STRUCTURED-FIELDS}}.
+
+The following example shows a response for a request with a mismatching SHA-256 digest value.
+
+~~~ http-message
+HTTP/1.1 400 Bad Request
+Content-Type: application/problem+json
+
+{
+  "type": "https://iana.org/assignments/http-problem-types#mismatching-digest-value",
+  "title": "digest value fromr request does not match expected value",
+  "algorithm": "sha-256",
+  "provided-digest": ":RK/0qy18MlBSVnWgjwz6lZEWjP/lF5HF9bvEF8FabDg=:",
+  "expected-digest": ":d435Qo+nKZ+gLcUHn7GQtQ72hiBVAgqoLsZnZPiTGPk=:"
+}
+~~~
+
+If the sender receives this problem type, the request might be modified unintentionally by an intermediary. The sender MAY retry the request without modification. However, if the sender continue receiving this problem type, it SHOULD stop retrying.
+
 # Security Considerations
 
 Although an error appeared while handling the digest fields, the resource may choose to not disclose this error to the sender to avoid lacking implementation details. Similar, the resource may choose a general problem type for the response even in a more specific problem type is defined if it prefers to hide the details of the error from the sender.
@@ -144,6 +167,20 @@ Type URI:
 
 Title:
 : Invalid Digest Value
+
+Recommended HTTP status code:
+: 400
+
+Reference:
+: This document
+
+IANA is asked to register the following entry in the "HTTP Problem Types" registry:
+
+Type URI:
+: https://iana.org/assignments/http-problem-types#mismatching-digest-value
+
+Title:
+: Mismatching Digest Value
 
 Recommended HTTP status code:
 : 400
