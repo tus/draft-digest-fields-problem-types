@@ -88,7 +88,7 @@ Content-Type: application/problem+json
 
 {
   "type": "https://iana.org/assignments/http-problem-types#unsupported-hashing-algorithm",
-  "title": "upload is already completed",
+  "title": "hashing algorithm is not supported",
   "unsupported-algorithm": "foo",
   "supported-algorithms": ["sha-256", "sha-512"]
 }
