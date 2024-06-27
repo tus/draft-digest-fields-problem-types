@@ -45,7 +45,7 @@ TODO Abstract
 
 # Introduction
 
-Digest fields {{DIGEST}} are HTTP fields that support integrity digests. A request can include the `Content-Digest` and `Repr-Digest` header fields for verifying the integrity of the HTTP message content and the HTTP representation, respectively. In addition, a sender can include the `Want-Content-Digest` and `Want-Repr-Digest` header fields in a request to express interest in receiving integrity field in the response. {{!RFC9530}} by design does not define, require or recommend specific resource behavior if errors regarding the integrity appear.
+Digest fields {{DIGEST}} are HTTP fields that support integrity digests. A request can include the `Content-Digest` and `Repr-Digest` header fields for verifying the integrity of the HTTP message content and the HTTP representation, respectively. In addition, a sender can include the `Want-Content-Digest` and `Want-Repr-Digest` header fields in a request to express interest in receiving integrity field in the response. {{DIGEST}} by design does not define, require or recommend specific resource behavior if errors regarding the integrity appear.
 
 For example, a request may include a digest algorithm in the `Content-Digest` and `Repr-Digest` header fields that the resource does not support. Similar, a sender may request to the digest utilizing a hashing algorithm that the resource does not support. Another possible problem is that the digest supplied in the request does not match up with the digest calculated by the resource. Depending on the application, the resource may choose to ignore these errors or communicate them back to the client. However, no recommended response format for communicating these error is defined so far.
 
