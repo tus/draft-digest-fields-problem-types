@@ -24,9 +24,9 @@ venue:
 
 author:
  -
-    fullname: "Marius"
-    organization: Your Organization Here
-    email: "marius.kleidl@gmail.com"
+    fullname: "Marius Kleidl"
+    organization: Transloadit
+    email: "marius@transloadit.com"
 
 normative:
 
