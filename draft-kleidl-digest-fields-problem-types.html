@@ -1161,12 +1161,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
       <h2 id="name-introduction">
 <a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
       </h2>
-<p id="section-1-1">TODO Introduction<a href="#section-1-1" class="pilcrow">¶</a></p>
-<p id="section-1-2">Digest fields <span>[<a href="#DIGEST" class="cite xref">DIGEST</a>]</span> are HTTP fields that support integrity digests. A request can include the <code>Content-Digest</code> and <code>Repr-Digest</code> header fields for verifying the integrity of the HTTP message content and the HTTP representation, respectively. In addition, a sender can include the <code>Want-Content-Digest</code> and <code>Want-Repr-Digest</code> header fields in a request to express interest in receiving integrity field in the response. <span>[<a href="#RFC9530" class="cite xref">RFC9530</a>]</span> by design does not define, require or recommend specific resource behavior if errors regarding the integrity appear.<a href="#section-1-2" class="pilcrow">¶</a></p>
-<p id="section-1-3">For example, a request may include a digest algorithm in the <code>Content-Digest</code> and <code>Repr-Digest</code> header fields that the resource does not support. Similar, a sender may request to the digest utilizing a hashing algorithm that the resource does not support. Another possible problem is that the digest supplied in the request does not match up with the digest calculated by the resource. Depending on the application, the resource may choose to ignore these errors or communicate them back to the client. However, no recommended response format for communicating these error is defined so far.<a href="#section-1-3" class="pilcrow">¶</a></p>
-<p id="section-1-4">Problem types <span>[<a href="#PROBLEM" class="cite xref">PROBLEM</a>]</span> are machine-readable description of errors in HTTP response content <span>[<a href="#PROBLEM" class="cite xref">PROBLEM</a>]</span>. Each problem definition includes a unique type that can be used to identify the error and also allows the attachment of a short, human-readable summary as well as additional properties to aid debugging and error handling. In addition, a JSON and XML representation of the problem types is defined to simplify parsing.<a href="#section-1-4" class="pilcrow">¶</a></p>
-<p id="section-1-5">As an example, if the resource receives a request with an integrity field utilizing an unsupported hashing algorithm <code>foo</code>, the response may use the following problem type:<a href="#section-1-5" class="pilcrow">¶</a></p>
-<div class="lang-http-message sourcecode" id="section-1-6">
+<p id="section-1-1">Digest fields <span>[<a href="#DIGEST" class="cite xref">DIGEST</a>]</span> are HTTP fields that support integrity digests. A request can include the <code>Content-Digest</code> and <code>Repr-Digest</code> header fields for verifying the integrity of the HTTP message content and the HTTP representation, respectively. In addition, a sender can include the <code>Want-Content-Digest</code> and <code>Want-Repr-Digest</code> header fields in a request to express interest in receiving integrity field in the response. <span>[<a href="#RFC9530" class="cite xref">RFC9530</a>]</span> by design does not define, require or recommend specific resource behavior if errors regarding the integrity appear.<a href="#section-1-1" class="pilcrow">¶</a></p>
+<p id="section-1-2">For example, a request may include a digest algorithm in the <code>Content-Digest</code> and <code>Repr-Digest</code> header fields that the resource does not support. Similar, a sender may request to the digest utilizing a hashing algorithm that the resource does not support. Another possible problem is that the digest supplied in the request does not match up with the digest calculated by the resource. Depending on the application, the resource may choose to ignore these errors or communicate them back to the client. However, no recommended response format for communicating these error is defined so far.<a href="#section-1-2" class="pilcrow">¶</a></p>
+<p id="section-1-3">Problem types <span>[<a href="#PROBLEM" class="cite xref">PROBLEM</a>]</span> are machine-readable description of errors in HTTP response content <span>[<a href="#PROBLEM" class="cite xref">PROBLEM</a>]</span>. Each problem definition includes a unique type that can be used to identify the error and also allows the attachment of a short, human-readable summary as well as additional properties to aid debugging and error handling. In addition, a JSON and XML representation of the problem types is defined to simplify parsing.<a href="#section-1-3" class="pilcrow">¶</a></p>
+<p id="section-1-4">As an example, if the resource receives a request with an integrity field utilizing an unsupported hashing algorithm <code>foo</code>, the response may use the following problem type:<a href="#section-1-4" class="pilcrow">¶</a></p>
+<div class="lang-http-message sourcecode" id="section-1-5">
 <pre>
 HTTP/1.1 400 Bad Request
 Content-Type: application/problem+json
@@ -1177,9 +1176,9 @@ Content-Type: application/problem+json
   "requested-algorithm": "foo",
   "supported-algorithms": ["sha-256", "sha-512"]
 }
-</pre><a href="#section-1-6" class="pilcrow">¶</a>
+</pre><a href="#section-1-5" class="pilcrow">¶</a>
 </div>
-<p id="section-1-7">The response includes the unique problem type, the requested algorithm that is not supported by the resource, as well as an array of the supported algorithms.<a href="#section-1-7" class="pilcrow">¶</a></p>
+<p id="section-1-6">The response includes the unique problem type, the requested algorithm that is not supported by the resource, as well as an array of the supported algorithms.<a href="#section-1-6" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="conventions-and-definitions">
@@ -1241,23 +1240,20 @@ Content-Type: application/problem+json
 <span class="break"></span><dl class="dlParallel" id="section-5-2">
         <dt id="section-5-2.1">Type URI:</dt>
         <dd style="margin-left: 1.5em" id="section-5-2.2">
-          <p id="section-5-2.2.1">https://iana.org/assignments/http-problem-types#unsupported-hashing-algorithm
-Title:<a href="#section-5-2.2.1" class="pilcrow">¶</a></p>
+          <p id="section-5-2.2.1">https://iana.org/assignments/http-problem-types#unsupported-hashing-algorithm<a href="#section-5-2.2.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
-<dt id="section-5-2.3"></dt>
+<dt id="section-5-2.3">Title:</dt>
         <dd style="margin-left: 1.5em" id="section-5-2.4">
-          <p id="section-5-2.4.1">Unsupported Hashing Algorithm
-Recommended HTTP status code:<a href="#section-5-2.4.1" class="pilcrow">¶</a></p>
+          <p id="section-5-2.4.1">Unsupported Hashing Algorithm<a href="#section-5-2.4.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
-<dt id="section-5-2.5"></dt>
+<dt id="section-5-2.5">Recommended HTTP status code:</dt>
         <dd style="margin-left: 1.5em" id="section-5-2.6">
-          <p id="section-5-2.6.1">400
-Reference:<a href="#section-5-2.6.1" class="pilcrow">¶</a></p>
+          <p id="section-5-2.6.1">400<a href="#section-5-2.6.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
-<dt id="section-5-2.7"></dt>
+<dt id="section-5-2.7">Reference:</dt>
         <dd style="margin-left: 1.5em" id="section-5-2.8">
           <p id="section-5-2.8.1">This document<a href="#section-5-2.8.1" class="pilcrow">¶</a></p>
 </dd>

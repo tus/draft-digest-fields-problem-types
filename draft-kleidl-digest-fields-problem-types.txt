@@ -73,8 +73,6 @@ Table of Contents
 
 1.  Introduction
 
-   TODO Introduction
-
    Digest fields [DIGEST] are HTTP fields that support integrity
    digests.  A request can include the Content-Digest and Repr-Digest
    header fields for verifying the integrity of the HTTP message content
@@ -178,13 +176,13 @@ Table of Contents
    Types" registry:
 
    Type URI:  https://iana.org/assignments/http-problem-
-      types#unsupported-hashing-algorithm Title:
+      types#unsupported-hashing-algorithm
 
-      Unsupported Hashing Algorithm Recommended HTTP status code:
+   Title:  Unsupported Hashing Algorithm
 
-      400 Reference:
+   Recommended HTTP status code:  400
 
-      This document
+   Reference:  This document
 
 6.  Normative References
 
