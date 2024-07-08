@@ -4,8 +4,8 @@
 
 Network Working Group                                          M. Kleidl
 Internet-Draft                                               Transloadit
-Intended status: Informational                              27 June 2024
-Expires: 29 December 2024
+Intended status: Informational                               8 July 2024
+Expires: 9 January 2025
 
 
                   HTTP Problem Types for Digest Fields
@@ -43,7 +43,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 29 December 2024.
+   This Internet-Draft will expire on 9 January 2025.
 
 Copyright Notice
 
@@ -200,7 +200,7 @@ Table of Contents
 
    If the sender receives this problem type, it SHOULD NOT retry the
    request without modification.  Such an error is likely rooted in a
-   fault in the sender's computation or encoding of the digest value.
+   fault in the sender's calculation or encoding of the digest value.
 
 3.3.  Mismatching Digest Value
 
@@ -208,16 +208,16 @@ Table of Contents
    types#mismatching-digest-value" problem type [PROBLEM].  A server MAY
    use this problem type when responding to a request, whose integrity
    fields include a digest value that does not match the digest value
-   that the server computed for the request content or representation.
+   that the server calculated for the request content or representation.
 
    Three problem type extension members are defined: the algorithm,
-   provided-digest, and expected-digest members.  A response using this
-   problem type SHOULD populate all members, with the value of algorithm
-   being the algorithm key of the used hashing algorithm, with the value
-   of provided-digest being the digest value taken from the request's
-   integrity fields, and the value of expected-digest being the computed
-   digest.  The digest values MUST BE serialized as byte sequences as
-   described in Section 4.1.8 of [STRUCTURED-FIELDS].
+   provided-digest, and calculated-digest members.  A response using
+   this problem type SHOULD populate all members, with the value of
+   algorithm being the algorithm key of the used hashing algorithm, with
+   the value of provided-digest being the digest value taken from the
+   request's integrity fields, and the value of calculated-digest being
+   the calculated digest.  The digest values MUST BE serialized as byte
+   sequences as described in Section 4.1.8 of [STRUCTURED-FIELDS].
 
    The following example shows a response for a request with a
    mismatching SHA-256 digest value.
@@ -230,7 +230,7 @@ Table of Contents
      "title": "digest value fromr request does not match expected value",
      "algorithm": "sha-256",
      "provided-digest": ":RK/0qy18MlBSVnWgjwz6lZEWjP/lF5HF9bvEF8FabDg=:",
-     "expected-digest": ":d435Qo+nKZ+gLcUHn7GQtQ72hiBVAgqoLsZnZPiTGPk=:"
+     "calculated-digest": ":d435Qo+nKZ+gLcUHn7GQtQ72hiBVAgqoLsZnZPiTGPk=:"
    }
 
    If the sender receives this problem type, the request might be
