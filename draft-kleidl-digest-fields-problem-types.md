@@ -38,34 +38,27 @@ informative:
 
 --- abstract
 
-TODO Abstract
-
+This document specifies problem types that servers can use in responses to problems encountered while dealing with a request carrying integrity fields and integrity preference fields.
 
 --- middle
 
 # Introduction
 
-Digest fields {{DIGEST}} are HTTP fields that support integrity digests. A request can include the `Content-Digest` and `Repr-Digest` header fields for verifying the integrity of the HTTP message content and the HTTP representation, respectively. In addition, a sender can include the `Want-Content-Digest` and `Want-Repr-Digest` header fields in a request to express interest in receiving integrity field in the response. {{DIGEST}} by design does not define, require or recommend specific server behavior if errors regarding the integrity appear.
+{{DIGEST}} by design does not define, require or recommend any specific behavior for error handling relating to integrity. The responsibility is instead delegated to applications. This draft defines a set of problem types {{PROBLEM}} that can be used by server applications to indicate that a problem was encountered while dealing with a request carrying integrity fields and integrity preference fields.
 
-For example, a request may include a digest algorithm in the `Content-Digest` and `Repr-Digest` header fields that the server does not support. Similar, a sender may request to the digest utilizing a hashing algorithm that the server does not support. Another possible problem is that the digest supplied in the request does not match up with the digest calculated by the server. Depending on the application, the server may choose to ignore these errors or communicate them back to the client. However, no recommended response format for communicating these errors is defined so far.
-
-Problem types {{PROBLEM}} are machine-readable description of errors in HTTP response content {{PROBLEM}}. Each problem definition includes a unique type that can be used to identify the error and also allows the attachment of a short, human-readable summary as well as additional properties to aid debugging and error handling. In addition, a JSON and XML representation of the problem types is defined to simplify parsing.
-
-As an example, if the resource receives a request with an integrity field utilizing an unsupported hashing algorithm `foo`, the response may use the following problem type:
+For example, a request message may include content alongside `Content-Digest` and `Repr-Digest` header fields that use a digest algorithm the server does not support. An application could decide to reject this request because it cannot validate the integrity. Using a problem type, the server can provide machine-readable error details to aid debugging or error reporting, as shown in the following example.
 
 ~~~ http-message
 HTTP/1.1 400 Bad Request
 Content-Type: application/problem+json
+Want-Content-Digest: sha-512=3, sha-256=10
 
 {
   "type": "https://iana.org/assignments/http-problem-types#unsupported-hashing-algorithm",
-  "title": "upload is already completed",
-  "requested-algorithm": "foo",
-  "supported-algorithms": ["sha-256", "sha-512"]
+  "title": "hashing algorithm is not supported",
+  "unsupported-algorithm": "foo"
 }
 ~~~
-
-The response includes the unique problem type, the requested algorithm that is not supported by the server, as well as an array of the supported algorithms.
 
 # Conventions and Definitions
 
