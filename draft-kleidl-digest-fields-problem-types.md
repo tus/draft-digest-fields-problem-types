@@ -27,6 +27,10 @@ author:
     fullname: "Marius Kleidl"
     organization: Transloadit
     email: "marius@transloadit.com"
+ -
+    fullname: "Lucas Pardue"
+    organization: Cloudflare
+    email: "lucas@lucaspardue.com"
 
 normative:
   DIGEST: RFC9530
@@ -187,4 +191,4 @@ Reference:
 # Acknowledgments
 {:numbered="false"}
 
-TODO acknowledge.
+This document is based on ideas from a discussion with Roberto Polli, so thanks to him for his valuable input and feedback on this topic.
