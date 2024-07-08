@@ -95,7 +95,7 @@ Content-Type: application/problem+json
 }
 ~~~
 
-If the sender receives this problem type, it SHOULD retry the request while picking another hashing algorithm. If the response includes an array of supported algorithms, it SHOULD choose one of them.
+This problem type is a hint to the client about algorithm support, which the client could use to retry the request with a different algorithm supported by the server.
 
 ## Invalid Digest Value
 
@@ -115,7 +115,8 @@ Content-Type: application/problem+json
 }
 ~~~
 
-If the sender receives this problem type, it SHOULD NOT retry the request without modification. Such an error is likely rooted in a fault in the sender's calculation or encoding of the digest value.
+This problem type indicates a fault in the sender's calculation or encoding of the digest value. A retry of the same request without modification will likely not yield a successful response.
+
 
 ## Mismatching Digest Value
 
@@ -138,7 +139,7 @@ Content-Type: application/problem+json
 }
 ~~~
 
-If the sender receives this problem type, the request might be modified unintentionally by an intermediary. The sender MAY retry the request without modification. However, if the sender continue receiving this problem type, it SHOULD stop retrying.
+If the sender receives this problem type, the request might be modified unintentionally by an intermediary. The sender could use this information to retry the request without modification to address temporary transmission issues. 
 
 # Security Considerations
 
