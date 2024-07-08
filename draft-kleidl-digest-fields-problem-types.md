@@ -115,13 +115,14 @@ Content-Type: application/problem+json
 }
 ~~~
 
-This problem type indicates a fault in the sender's computation or encoding of the digest value. A retry of the same request without modification will likely not yield a successful response.
+This problem type indicates a fault in the sender's calculation or encoding of the digest value. A retry of the same request without modification will likely not yield a successful response.
+
 
 ## Mismatching Digest Value
 
-This section defines the "https://iana.org/assignments/http-problem-types#mismatching-digest-value" problem type {{PROBLEM}}. A server MAY use this problem type when responding to a request, whose integrity fields include a digest value that does not match the digest value that the server computed for the request content or representation.
+This section defines the "https://iana.org/assignments/http-problem-types#mismatching-digest-value" problem type {{PROBLEM}}. A server MAY use this problem type when responding to a request, whose integrity fields include a digest value that does not match the digest value that the server calculated for the request content or representation.
 
-Three problem type extension members are defined: the `algorithm`, `provided-digest`, and `expected-digest` members. A response using this problem type SHOULD populate all members, with the value of `algorithm` being the algorithm key of the used hashing algorithm, with the value of `provided-digest` being the digest value taken from the request's integrity fields, and the value of `expected-digest` being the computed digest. The digest values MUST BE serialized as byte sequences as described in {{Section 4.1.8 of STRUCTURED-FIELDS}}.
+Three problem type extension members are defined: the `algorithm`, `provided-digest`, and `calculated-digest` members. A response using this problem type SHOULD populate all members, with the value of `algorithm` being the algorithm key of the used hashing algorithm, with the value of `provided-digest` being the digest value taken from the request's integrity fields, and the value of `calculated-digest` being the calculated digest. The digest values MUST BE serialized as byte sequences as described in {{Section 4.1.8 of STRUCTURED-FIELDS}}.
 
 The following example shows a response for a request with a mismatching SHA-256 digest value.
 
@@ -134,7 +135,7 @@ Content-Type: application/problem+json
   "title": "digest value fromr request does not match expected value",
   "algorithm": "sha-256",
   "provided-digest": ":RK/0qy18MlBSVnWgjwz6lZEWjP/lF5HF9bvEF8FabDg=:",
-  "expected-digest": ":d435Qo+nKZ+gLcUHn7GQtQ72hiBVAgqoLsZnZPiTGPk=:"
+  "calculated-digest": ":d435Qo+nKZ+gLcUHn7GQtQ72hiBVAgqoLsZnZPiTGPk=:"
 }
 ~~~
 
