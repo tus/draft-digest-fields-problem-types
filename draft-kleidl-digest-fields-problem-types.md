@@ -136,7 +136,7 @@ Content-Type: application/problem+json
 }
 ~~~
 
-If the sender receives this problem type, the request might be modified unintentionally by an intermediary. The sender could use this information to retry the request without modification to address temporary transmission issues. 
+If the sender receives this problem type, the request might be modified unintentionally by an intermediary. The sender could use this information to retry the request without modification to address temporary transmission issues.
 
 # Security Considerations
 
