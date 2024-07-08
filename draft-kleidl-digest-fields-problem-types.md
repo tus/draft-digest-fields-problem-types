@@ -79,19 +79,19 @@ The terms "integrity fields" and "integrity preference fields" are from {{DIGEST
 
 This section defines the "https://iana.org/assignments/http-problem-types#unsupported-hashing-algorithm" problem type {{PROBLEM}}. A server MAY use this problem type when responding to a request, whose integrity or integrity preference fields reference a hashing algorithm that the server can not or does not want to support for this request, and if the server wants to indicate this problem to the sender.
 
-Two problem type extension members are defined: the `unsupported-algorithm` and `supported-algorithms` members. A response using this problem type SHOULD populate both members, with the value of `unsupported-algorithm` being the algorithm key of the unsupported algorithm from the request and the value of `supported-algorithms` being an array of the algorithm keys, as registered in the "Hash Algorithms for HTTP Digest Fields" registry, of the supported algorithms.
+For this problem type, the `unsupported-algorithm` is defined as the only extension member. It SHOULD be populated in a response using this problem type, with its value being the algorithm key of the unsupported algorithm from the request. The response SHOULD include the corresponding integrity preference field to indicate the server's algorithm support and preference.
 
 The following example shows a response for a request with an integrity field utilizing an unsupported hashing algorithm `foo`. The response also includes a list of supported algorithms.
 
 ~~~ http-message
 HTTP/1.1 400 Bad Request
 Content-Type: application/problem+json
+Want-Content-Digest: sha-512=3, sha-256=10
 
 {
   "type": "https://iana.org/assignments/http-problem-types#unsupported-hashing-algorithm",
   "title": "hashing algorithm is not supported",
-  "unsupported-algorithm": "foo",
-  "supported-algorithms": ["sha-256", "sha-512"]
+  "unsupported-algorithm": "foo"
 }
 ~~~
 
