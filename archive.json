@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-07-07T00:31:33.027794+00:00",
+  "timestamp": "2024-07-09T00:28:32.458031+00:00",
   "repo": "tus/draft-digest-fields-problem-types",
   "labels": [
     {
@@ -49,6 +49,164 @@
       "color": "ffffff"
     }
   ],
-  "issues": [],
-  "pulls": []
+  "issues": [
+    {
+      "number": 1,
+      "id": "I_kwDOMO7RzM6OzuxQ",
+      "title": "Clarify the problem statement and focus of the draft more",
+      "url": "https://github.com/tus/draft-digest-fields-problem-types/issues/1",
+      "state": "CLOSED",
+      "author": "LPardue",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Generally speaking, digests are \"bidirectional\". \r\n\r\n* A client can send them in relation to the request message, a server can optionally validate them\r\n* A server can sent them in relation to the response message, a client can optionally validate them\r\n\r\n\"Problem details\" is specific to response messages. So only a server can indicate to a client that something was wrong about the request itself (or that a problem occurred while processing the valid request).\r\n\r\nThe intro contains most of the right words but I think it can be improved a bit. I would break the final sentence of the first paragraph off, and expand on that some more. I'd delete some of the redefinition of things too, to cut down the text. For example,\r\n\r\n```\r\n[DIGEST] by design does not define, require or recommend any specific behavior for error handling related integrity. The responsibility is instead delegated to applications. This draft defines a set of problem types [PROBLEM] that can be used by server applications to indicate that a problem was encountered while dealing with a request carrying integrity fields and integrity preference fields.\r\n\r\nFor example, a request message may include content alongside Content-Digest and Repr-Digest header fields that use a digest algorithm the server does not support. An application could decide to reject this request because it cannot validate the integrity. Using a problem type, the server can provide machine-readable error details to aid debugging or error reporting.\r\n\r\n~~~\r\nHTTP/1.1 400 Bad Request\r\nContent-Type: application/problem+json\r\n\r\n{\r\n  \"type\": \"https://iana.org/assignments/http-problem-types#unsupported-hashing-algorithm\",\r\n  \"title\": hashing algorithm is not supported,\r\n  \"unsupported-algorithm\": \"foo\",\r\n  \"supported-algorithms\": [\"sha-256\", \"sha-512\"]\r\n}\r\n~~~\r\n```",
+      "createdAt": "2024-07-08T15:17:58Z",
+      "updatedAt": "2024-07-08T20:38:06Z",
+      "closedAt": "2024-07-08T20:32:37Z",
+      "comments": [
+        {
+          "author": "Acconut",
+          "authorAssociation": "MEMBER",
+          "body": "Thanks, your proposal makes the intro a lot lighter and clearer that this draft is concerned about the first use of digest fields:\r\n\r\n> A client can send them in relation to the request message, a server can optionally validate them",
+          "createdAt": "2024-07-08T20:31:49Z",
+          "updatedAt": "2024-07-08T20:38:06Z"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "id": "I_kwDOMO7RzM6OzzvQ",
+      "title": "Supported-algorthms duplicates want- response header?",
+      "url": "https://github.com/tus/draft-digest-fields-problem-types/issues/2",
+      "state": "CLOSED",
+      "author": "LPardue",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "You say\r\n\r\n> A server MAY use this problem type when responding to a request, whose integrity or integrity preference fields reference a hashing algorithm that the server can not or does not want to support for this request, and if the server wants to indicate this problem to the sender.\r\n\r\nFrom https://httpwg.org/specs/rfc9530.html#want-fields\r\n\r\n> If Want-Content-Digest or Want-Repr-Digest are used in a response, it indicates that the server would like the client to provide the respective Integrity field on future requests.\r\n\r\nThe Want- headers are a preference list of algorithms, It seems like Supported-algorthms duplicates the capability, which is not ideal. The unsupported-algorithm field is still usefule, since it might not be clear what algorithm specificall failed (imagine a request that contained multiple integrity fields with different algorithms and the application mandated that all of them must validate).\r\n\r\n",
+      "createdAt": "2024-07-08T15:28:01Z",
+      "updatedAt": "2024-07-08T20:00:06Z",
+      "closedAt": "2024-07-08T20:00:06Z",
+      "comments": [
+        {
+          "author": "Acconut",
+          "authorAssociation": "MEMBER",
+          "body": "Right, problem types gave me the ability to define additional members and I couldn't hold myself back from using it. Thanks!",
+          "createdAt": "2024-07-08T19:59:14Z",
+          "updatedAt": "2024-07-08T19:59:14Z"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "id": "I_kwDOMO7RzM6Oz01N",
+      "title": "Don't mandate client behaviour",
+      "url": "https://github.com/tus/draft-digest-fields-problem-types/issues/3",
+      "state": "CLOSED",
+      "author": "LPardue",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Related to #2, you say  \r\n\r\n> If the sender receives this problem type, it SHOULD retry the request while picking another hashing algorithm. If the response includes an array of supported algorithms, it SHOULD choose one of them.\r\n\r\nThis document should, IMO, focus on server signals. What to do with them is still left as an exercise for the application (or another spec). Instead, we can relax the wording to be like\r\n\r\n\"this problem type is a hint to the client about algorithm support, the client could use this information to retry the request with a different algorithm\"",
+      "createdAt": "2024-07-08T15:30:16Z",
+      "updatedAt": "2024-07-08T19:51:03Z",
+      "closedAt": "2024-07-08T19:51:03Z",
+      "comments": []
+    },
+    {
+      "number": 4,
+      "id": "I_kwDOMO7RzM6Oz3En",
+      "title": "expected-digest seems prescient ",
+      "url": "https://github.com/tus/draft-digest-fields-problem-types/issues/4",
+      "state": "CLOSED",
+      "author": "LPardue",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "I'm not sure how a server calculating a digest on request bytes can know what the expected value was, isn't that the `provided-digest`? Maybe its better to rename the field to `calculated-digest`. That takes any notion of opinion out of the interaction.",
+      "createdAt": "2024-07-08T15:34:28Z",
+      "updatedAt": "2024-07-08T19:49:59Z",
+      "closedAt": "2024-07-08T19:49:59Z",
+      "comments": [
+        {
+          "author": "Acconut",
+          "authorAssociation": "MEMBER",
+          "body": "`calculated-digest` is better, I agree. Thanks!",
+          "createdAt": "2024-07-08T19:48:13Z",
+          "updatedAt": "2024-07-08T19:48:13Z"
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "id": "I_kwDOMO7RzM6Oz3yO",
+      "title": "This may reveal information about intermediaries",
+      "url": "https://github.com/tus/draft-digest-fields-problem-types/issues/5",
+      "state": "OPEN",
+      "author": "LPardue",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": ".. and that might need a security consideration",
+      "createdAt": "2024-07-08T15:35:54Z",
+      "updatedAt": "2024-07-08T15:35:54Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 6,
+      "id": "I_kwDOMO7RzM6Oz46y",
+      "title": "idea: maybe signatures would benefit from some problem types too?",
+      "url": "https://github.com/tus/draft-digest-fields-problem-types/issues/6",
+      "state": "OPEN",
+      "author": "LPardue",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Time is short so don't do this now but I suggest reaching out to Justin Richer about HTTP signatures to see if they might benefit from some problem types too. See https://httpwg.org/specs/rfc9421.html#rfc.section.1.4 and specifically\r\n\r\n> If the response is from an HTTP API, a response with an HTTP status code such as 400 (Bad Request) could include more details [[RFC7807]](https://httpwg.org/specs/rfc9421.html#RFC7807) [[RFC9457]](https://httpwg.org/specs/rfc9421.html#RFC9457), such as an indicator that the wrong key material was used.",
+      "createdAt": "2024-07-08T15:38:14Z",
+      "updatedAt": "2024-07-08T19:24:32Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "Acconut",
+          "authorAssociation": "MEMBER",
+          "body": "That's a good idea. I will reach out to Justin and see if there is interested to do so. Maybe there is the potential to share problem types between digests and signatures.",
+          "createdAt": "2024-07-08T19:24:32Z",
+          "updatedAt": "2024-07-08T19:24:32Z"
+        }
+      ]
+    }
+  ],
+  "pulls": [
+    {
+      "number": 7,
+      "id": "PR_kwDOMO7RzM50vNh5",
+      "title": "Relax recommendations on client behavior",
+      "url": "https://github.com/tus/draft-digest-fields-problem-types/pull/7",
+      "state": "MERGED",
+      "author": "Acconut",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "Closes https://github.com/tus/draft-digest-fields-problem-types/issues/3.",
+      "createdAt": "2024-07-08T19:47:19Z",
+      "updatedAt": "2024-07-08T19:51:02Z",
+      "baseRepository": "tus/draft-digest-fields-problem-types",
+      "baseRefName": "main",
+      "baseRefOid": "d0bc9e78cdc4229c430176492416dce9880edf49",
+      "headRepository": "tus/draft-digest-fields-problem-types",
+      "headRefName": "client-behavior",
+      "headRefOid": "9799388188e5fa431835b31add6ff0519f828f3f",
+      "closedAt": "2024-07-08T19:51:02Z",
+      "mergedAt": "2024-07-08T19:51:02Z",
+      "mergedBy": "Acconut",
+      "mergeCommit": {
+        "oid": "fb282e191b8a5e173abad5da2a6fd70b0254504d"
+      },
+      "comments": [],
+      "reviews": []
+    }
+  ]
 }
