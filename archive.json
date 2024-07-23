@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-07-21T00:32:13.998277+00:00",
+  "timestamp": "2024-07-23T00:29:25.427403+00:00",
   "repo": "tus/draft-digest-fields-problem-types",
   "labels": [
     {
@@ -177,6 +177,54 @@
           "updatedAt": "2024-07-08T19:24:32Z"
         }
       ]
+    },
+    {
+      "number": 8,
+      "id": "I_kwDOMO7RzM6QVuBr",
+      "title": "Add complete request-response examples",
+      "url": "https://github.com/tus/draft-digest-fields-problem-types/issues/8",
+      "state": "OPEN",
+      "author": "ioggstream",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "## I expect\r\n\r\n- add complete request-response examples\r\n\r\n## Instead \r\n\r\n- only responses are present",
+      "createdAt": "2024-07-21T21:44:18Z",
+      "updatedAt": "2024-07-21T21:44:18Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 9,
+      "id": "I_kwDOMO7RzM6QVuJS",
+      "title": "Inherit examples from Digest Fields",
+      "url": "https://github.com/tus/draft-digest-fields-problem-types/issues/9",
+      "state": "OPEN",
+      "author": "ioggstream",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "## I expect\r\n\r\n- inherit examples from https://www.rfc-editor.org/rfc/rfc9530.html",
+      "createdAt": "2024-07-21T21:46:01Z",
+      "updatedAt": "2024-07-21T21:46:01Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 12,
+      "id": "I_kwDOMO7RzM6QVx9Y",
+      "title": "Unsupported algorithm's feedback",
+      "url": "https://github.com/tus/draft-digest-fields-problem-types/issues/12",
+      "state": "OPEN",
+      "author": "ioggstream",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "## Notes\r\n\r\n\r\n- can problem details use normative language WRT identity fields (e.",
+      "createdAt": "2024-07-21T22:35:26Z",
+      "updatedAt": "2024-07-21T22:35:26Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
@@ -205,6 +253,108 @@
       "mergeCommit": {
         "oid": "fb282e191b8a5e173abad5da2a6fd70b0254504d"
       },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 10,
+      "id": "PR_kwDOMO7RzM52Bjgn",
+      "title": "Preliminary editorial",
+      "url": "https://github.com/tus/draft-digest-fields-problem-types/pull/10",
+      "state": "CLOSED",
+      "author": "ioggstream",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "## This PR\r\n\r\n- preliminary editorial stuff",
+      "createdAt": "2024-07-21T22:04:52Z",
+      "updatedAt": "2024-07-21T22:10:06Z",
+      "baseRepository": "tus/draft-digest-fields-problem-types",
+      "baseRefName": "main",
+      "baseRefOid": "97cc1f49760107fd0b34e7d617581ef01ecc2969",
+      "headRepository": "ioggstream/draft-digest-fields-problem-types",
+      "headRefName": "ioggstream-editorial",
+      "headRefOid": "b8735692f7ad04173d8464fcd9295c74a5637cc6",
+      "closedAt": "2024-07-21T22:09:37Z",
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "ioggstream",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "superseeded by multiple, smaller PR",
+          "createdAt": "2024-07-21T22:10:02Z",
+          "updatedAt": "2024-07-21T22:10:02Z"
+        }
+      ],
+      "reviews": []
+    },
+    {
+      "number": 11,
+      "id": "PR_kwDOMO7RzM52BjyL",
+      "title": "Terminology from DIGEST.",
+      "url": "https://github.com/tus/draft-digest-fields-problem-types/pull/11",
+      "state": "MERGED",
+      "author": "ioggstream",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "## This PR\r\n\r\n- reuse terminology from DIGEST",
+      "createdAt": "2024-07-21T22:09:26Z",
+      "updatedAt": "2024-07-22T07:58:14Z",
+      "baseRepository": "tus/draft-digest-fields-problem-types",
+      "baseRefName": "main",
+      "baseRefOid": "97cc1f49760107fd0b34e7d617581ef01ecc2969",
+      "headRepository": "ioggstream/draft-digest-fields-problem-types",
+      "headRefName": "ioggstream-editorial-1",
+      "headRefOid": "57c899e0b66d87f0d8f8d25feb212c7566dd8939",
+      "closedAt": "2024-07-22T07:58:14Z",
+      "mergedAt": "2024-07-22T07:58:14Z",
+      "mergedBy": "Acconut",
+      "mergeCommit": {
+        "oid": "8c1f4c152e8df4e0c17cadf8d1c8da1b6158675c"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOMO7RzM6CljOa",
+          "commit": {
+            "abbreviatedOid": "57c899e"
+          },
+          "author": "Acconut",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "Thank you very much!",
+          "createdAt": "2024-07-22T07:54:48Z",
+          "updatedAt": "2024-07-22T07:54:48Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 13,
+      "id": "PR_kwDOMO7RzM52Blbr",
+      "title": "Unsupported algos",
+      "url": "https://github.com/tus/draft-digest-fields-problem-types/pull/13",
+      "state": "OPEN",
+      "author": "ioggstream",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-07-21T22:36:07Z",
+      "updatedAt": "2024-07-21T22:36:08Z",
+      "baseRepository": "tus/draft-digest-fields-problem-types",
+      "baseRefName": "main",
+      "baseRefOid": "97cc1f49760107fd0b34e7d617581ef01ecc2969",
+      "headRepository": "ioggstream/draft-digest-fields-problem-types",
+      "headRefName": "ioggstream-editorial-2",
+      "headRefOid": "6b0baaa44738eb9ca75f6d2a5017e64ab75c906c",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
       "comments": [],
       "reviews": []
     }
