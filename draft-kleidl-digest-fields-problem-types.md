@@ -100,7 +100,17 @@ This section defines the "https://iana.org/assignments/http-problem-types#invali
 
 The server SHOULD include a human-readable description why the value is considered invalid in the `title` member.
 
-The following example shows a response for a request with an invalid digest value.
+The following example shows a request with the content `{"hello": "world"}` (plus LF), but the digest has been truncated. The subsequent response indicates the invalid SHA-512 digest.
+
+~~~ http-message
+PUT /items/123 HTTP/1.1
+Host: foo.example
+Content-Type: application/json
+Repr-Digest: sha-512=:YMAam51Jz/jOATT6/zvHrLVgOYTGFy1d6GJiOHTohq4:
+
+{"hello": "world"}
+~~~
+{: title="A request with a sha-512 integrity field, whose digest has been truncated"}
 
 ~~~ http-message
 HTTP/1.1 400 Bad Request
@@ -111,6 +121,7 @@ Content-Type: application/problem+json
   "title": "digest value for sha-512 is not 64 bytes long"
 }
 ~~~
+{: title="Response indicating that the provided digest is too short"}
 
 This problem type indicates a fault in the sender's calculation or encoding of the digest value. A retry of the same request without modification will likely not yield a successful response.
 
@@ -121,7 +132,17 @@ This section defines the "https://iana.org/assignments/http-problem-types#mismat
 
 Three problem type extension members are defined: the `algorithm`, `provided-digest`, and `calculated-digest` members. A response using this problem type SHOULD populate all members, with the value of `algorithm` being the algorithm key of the used hashing algorithm, with the value of `provided-digest` being the digest value taken from the request's integrity fields, and the value of `calculated-digest` being the calculated digest. The digest values MUST BE serialized as byte sequences as described in {{Section 4.1.8 of STRUCTURED-FIELDS}}.
 
-The following example shows a response for a request with a mismatching SHA-256 digest value.
+The following example shows a request with the content `{"hello": "woXYZ"}` (plus LF), but the representation digest for `{"hello": "world"}` (plus LF). The subsequent response indicates the mismatching SHA-256 digest values.
+
+~~~ http-message
+PUT /items/123 HTTP/1.1
+Host: foo.example
+Content-Type: application/json
+Repr-Digest: sha-256=:RK/0qy18MlBSVnWgjwz6lZEWjP/lF5HF9bvEF8FabDg=:
+
+{"hello": "woXYZ"}
+~~~
+{: title="A request with a sha-256 integrity field, which does not match the representation"}
 
 ~~~ http-message
 HTTP/1.1 400 Bad Request
@@ -132,9 +153,10 @@ Content-Type: application/problem+json
   "title": "digest value fromr request does not match expected value",
   "algorithm": "sha-256",
   "provided-digest": ":RK/0qy18MlBSVnWgjwz6lZEWjP/lF5HF9bvEF8FabDg=:",
-  "calculated-digest": ":d435Qo+nKZ+gLcUHn7GQtQ72hiBVAgqoLsZnZPiTGPk=:"
+  "calculated-digest": ":8vXo+0QVwf2woEblm4hTAftp0/K5fWSMZG4CKtplwjc=:"
 }
 ~~~
+{: title="Response indicating the mismatching digests"}
 
 If the sender receives this problem type, the request might be modified unintentionally by an intermediary. The sender could use this information to retry the request without modification to address temporary transmission issues.
 
