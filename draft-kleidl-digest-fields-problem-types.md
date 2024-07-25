@@ -80,7 +80,7 @@ interpreted as described in {{PROBLEM}}.
 
 This section defines the "https://iana.org/assignments/http-problem-types#unsupported-hashing-algorithm" problem type.
 A server MAY use this problem type if it wants to communicate to the client that
-none of the hashing algorithms referenced in the integrity or integrity preference fields present in the request,
+one of the hashing algorithms referenced in the integrity or integrity preference fields present in the request,
 is supported.
 
 For this problem type, the `unsupported-algorithm` is defined as the only extension member.
