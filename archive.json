@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-07-25T00:29:10.434843+00:00",
+  "timestamp": "2024-07-28T00:32:28.611247+00:00",
   "repo": "tus/draft-digest-fields-problem-types",
   "labels": [
     {
@@ -190,9 +190,17 @@
       "labels": [],
       "body": "## I expect\r\n\r\n- add complete request-response examples\r\n\r\n## Instead \r\n\r\n- only responses are present",
       "createdAt": "2024-07-21T21:44:18Z",
-      "updatedAt": "2024-07-21T21:44:18Z",
+      "updatedAt": "2024-07-25T09:46:04Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "Acconut",
+          "authorAssociation": "MEMBER",
+          "body": "Opened https://github.com/tus/draft-digest-fields-problem-types/pull/14 to address this.",
+          "createdAt": "2024-07-25T09:46:04Z",
+          "updatedAt": "2024-07-25T09:46:04Z"
+        }
+      ]
     },
     {
       "number": 9,
@@ -206,9 +214,17 @@
       "labels": [],
       "body": "## I expect\r\n\r\n- inherit examples from https://www.rfc-editor.org/rfc/rfc9530.html",
       "createdAt": "2024-07-21T21:46:01Z",
-      "updatedAt": "2024-07-21T21:46:01Z",
+      "updatedAt": "2024-07-25T09:19:30Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "Acconut",
+          "authorAssociation": "MEMBER",
+          "body": "I looked at the examples and only [C.3.  Server Does Not Support Client Algorithm and Returns an Error](https://www.rfc-editor.org/rfc/rfc9530.html#name-server-does-not-support-cli) contains an error response caused by integrity fields. That one even uses problem details.\r\n\r\nDo you think we should inherit other examples as well?",
+          "createdAt": "2024-07-25T09:19:30Z",
+          "updatedAt": "2024-07-25T09:19:30Z"
+        }
+      ]
     },
     {
       "number": 12,
@@ -222,9 +238,17 @@
       "labels": [],
       "body": "## Notes\r\n\r\n\r\n- can problem details use normative language WRT identity fields (e.",
       "createdAt": "2024-07-21T22:35:26Z",
-      "updatedAt": "2024-07-21T22:35:26Z",
+      "updatedAt": "2024-07-25T09:22:34Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "Acconut",
+          "authorAssociation": "MEMBER",
+          "body": "Can you expand on this point a bit?",
+          "createdAt": "2024-07-25T09:22:33Z",
+          "updatedAt": "2024-07-25T09:22:33Z"
+        }
+      ]
     }
   ],
   "pulls": [
@@ -344,13 +368,124 @@
       "labels": [],
       "body": "",
       "createdAt": "2024-07-21T22:36:07Z",
-      "updatedAt": "2024-07-21T22:36:08Z",
+      "updatedAt": "2024-07-25T16:32:32Z",
       "baseRepository": "tus/draft-digest-fields-problem-types",
       "baseRefName": "main",
-      "baseRefOid": "97cc1f49760107fd0b34e7d617581ef01ecc2969",
+      "baseRefOid": "8c1f4c152e8df4e0c17cadf8d1c8da1b6158675c",
       "headRepository": "ioggstream/draft-digest-fields-problem-types",
       "headRefName": "ioggstream-editorial-2",
-      "headRefOid": "6b0baaa44738eb9ca75f6d2a5017e64ab75c906c",
+      "headRefOid": "ff04ad793bfba858879ef69f4712c6a722c9d194",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOMO7RzM6DDNoV",
+          "commit": {
+            "abbreviatedOid": "fba3606"
+          },
+          "author": "Acconut",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "Thank you very much for this PR!",
+          "createdAt": "2024-07-25T08:26:25Z",
+          "updatedAt": "2024-07-25T09:11:42Z",
+          "comments": [
+            {
+              "originalPosition": 7,
+              "body": "```suggestion\r\none of the hashing algorithms referenced in the integrity or integrity preference fields present in the request,\r\n```\r\n\r\nThe intention behind this problem type was that at least one algorithm is unsupported and the server wants to communicate this. Of course, the server could also just ignore that algorithm, but it might not want to do this. With this change, it sounds like the problem type is for cases when all hashing algorithms are unsupported.",
+              "createdAt": "2024-07-25T08:26:25Z",
+              "updatedAt": "2024-07-25T09:11:42Z"
+            },
+            {
+              "originalPosition": 34,
+              "body": "I like the usage of a preference being set to 0 to indicate that this algorithm is not acceptable. Do we still need the `unsupport-algorithm` member then? If not, we can get rid of it. The advantage of integrity preference fields would also be that the sender can indicate that multiple algorithms are unsupported.",
+              "createdAt": "2024-07-25T08:32:38Z",
+              "updatedAt": "2024-07-25T09:11:42Z"
+            },
+            {
+              "originalPosition": 63,
+              "body": "Is `Want-Repr-Digest` the correct field here? The server doesn't want to request the digest from the client, but just indicate that the client's requested algorithm cannot be fulfilled.\r\n\r\nMaybe for those cases we do need the `unsupported-algorithm` member.",
+              "createdAt": "2024-07-25T08:54:07Z",
+              "updatedAt": "2024-07-25T09:11:42Z"
+            },
+            {
+              "originalPosition": 50,
+              "body": "```suggestion\r\nNote that a request may contain more than one integrity field.\r\nThis problem type can also be used when a request contains an integrity preference field, e.g.\r\n```\r\n\r\nDoes it make sense to split this sentence?  They don't seem to be connected directly.",
+              "createdAt": "2024-07-25T08:55:19Z",
+              "updatedAt": "2024-07-25T09:11:42Z"
+            },
+            {
+              "originalPosition": 13,
+              "body": "Do you see a reason why this shouldn't use normative language here?",
+              "createdAt": "2024-07-25T09:11:25Z",
+              "updatedAt": "2024-07-25T09:11:42Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMO7RzM6DHosd",
+          "commit": {
+            "abbreviatedOid": "fba3606"
+          },
+          "author": "ioggstream",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-07-25T16:28:42Z",
+          "updatedAt": "2024-07-25T16:28:42Z",
+          "comments": [
+            {
+              "originalPosition": 7,
+              "body": "I agree. This is a tricky point, because the server is not required to process all algorithms.\r\n\r\nWe need to decide whether this problem-type applies to just one of the algorithms, or to all of the algorithms.\r\n\r\nProbably we need to re-examine this point after some time, so I leave this thread open.",
+              "createdAt": "2024-07-25T16:28:42Z",
+              "updatedAt": "2024-07-25T16:33:45Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMO7RzM6DHqN6",
+          "commit": {
+            "abbreviatedOid": "fba3606"
+          },
+          "author": "ioggstream",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-07-25T16:31:57Z",
+          "updatedAt": "2024-07-25T16:31:58Z",
+          "comments": [
+            {
+              "originalPosition": 13,
+              "body": "We can clarify that IF you send a problem-type response, you SHOULD then send an integrity preference field.\r\nIn this case, we are not only defining a problem-type, but even defining an associate behavior wrt to the fields that need to be used in conjunciton with it.",
+              "createdAt": "2024-07-25T16:31:57Z",
+              "updatedAt": "2024-07-25T16:31:58Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 14,
+      "id": "PR_kwDOMO7RzM52cR6n",
+      "title": "Add requests to examples",
+      "url": "https://github.com/tus/draft-digest-fields-problem-types/pull/14",
+      "state": "OPEN",
+      "author": "Acconut",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "In response to the feedback from https://github.com/tus/draft-digest-fields-problem-types/issues/8. I didn't touch the examples for unsupported hashing algorithms, because @ioggstream already does so in #13.",
+      "createdAt": "2024-07-25T09:45:38Z",
+      "updatedAt": "2024-07-25T09:45:38Z",
+      "baseRepository": "tus/draft-digest-fields-problem-types",
+      "baseRefName": "main",
+      "baseRefOid": "8c1f4c152e8df4e0c17cadf8d1c8da1b6158675c",
+      "headRepository": "tus/draft-digest-fields-problem-types",
+      "headRefName": "req-res",
+      "headRefOid": "3fe92928f16f494e775b0e14cceb52572af93712",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
