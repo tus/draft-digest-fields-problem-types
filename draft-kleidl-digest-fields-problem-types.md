@@ -117,8 +117,8 @@ Want-Repr-Digest: sha-512=10, sha-256=0
 
 This problem type is a hint to the client about algorithm support, which the client could use to retry the request with a different, supported, algorithm.
 
-Note that a request may contain more than one integrity field,
-and this problem type can be used both when a request contains an integrity preference field, e.g.
+Note that a request may contain more than one integrity field.
+This problem type can also be used when a request contains an integrity preference field, e.g.
 
 ~~~ http-message
 GET /items/123 HTTP/1.1
