@@ -131,7 +131,6 @@ Want-Repr-Digest: sha=10
 ~~~ http-message
 HTTP/1.1 400 Bad Request
 Content-Type: application/problem+json
-Want-Repr-Digest: sha-512=10, sha-256=3
 
 {
   "type": "https://iana.org/assignments/http-problem-types#unsupported-hashing-algorithm",
