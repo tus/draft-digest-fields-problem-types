@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-10-10T00:33:11.047765+00:00",
+  "timestamp": "2024-10-13T00:36:35.502415+00:00",
   "repo": "tus/draft-digest-fields-problem-types",
   "labels": [
     {
@@ -166,7 +166,7 @@
       "labels": [],
       "body": "Time is short so don't do this now but I suggest reaching out to Justin Richer about HTTP signatures to see if they might benefit from some problem types too. See https://httpwg.org/specs/rfc9421.html#rfc.section.1.4 and specifically\r\n\r\n> If the response is from an HTTP API, a response with an HTTP status code such as 400 (Bad Request) could include more details [[RFC7807]](https://httpwg.org/specs/rfc9421.html#RFC7807) [[RFC9457]](https://httpwg.org/specs/rfc9421.html#RFC9457), such as an indicator that the wrong key material was used.",
       "createdAt": "2024-07-08T15:38:14Z",
-      "updatedAt": "2024-07-08T19:24:32Z",
+      "updatedAt": "2024-10-10T09:44:13Z",
       "closedAt": null,
       "comments": [
         {
@@ -175,6 +175,13 @@
           "body": "That's a good idea. I will reach out to Justin and see if there is interested to do so. Maybe there is the potential to share problem types between digests and signatures.",
           "createdAt": "2024-07-08T19:24:32Z",
           "updatedAt": "2024-07-08T19:24:32Z"
+        },
+        {
+          "author": "ioggstream",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "cc:  @jricher \r\n\r\n",
+          "createdAt": "2024-10-10T09:44:12Z",
+          "updatedAt": "2024-10-10T09:44:12Z"
         }
       ]
     },
@@ -214,7 +221,7 @@
       "labels": [],
       "body": "## I expect\r\n\r\n- inherit examples from https://www.rfc-editor.org/rfc/rfc9530.html",
       "createdAt": "2024-07-21T21:46:01Z",
-      "updatedAt": "2024-07-25T09:19:30Z",
+      "updatedAt": "2024-10-10T09:43:12Z",
       "closedAt": null,
       "comments": [
         {
@@ -223,6 +230,13 @@
           "body": "I looked at the examples and only [C.3.  Server Does Not Support Client Algorithm and Returns an Error](https://www.rfc-editor.org/rfc/rfc9530.html#name-server-does-not-support-cli) contains an error response caused by integrity fields. That one even uses problem details.\r\n\r\nDo you think we should inherit other examples as well?",
           "createdAt": "2024-07-25T09:19:30Z",
           "updatedAt": "2024-07-25T09:19:30Z"
+        },
+        {
+          "author": "ioggstream",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Once we merge the other PRs I'll scrub the spec and check :)",
+          "createdAt": "2024-10-10T09:43:11Z",
+          "updatedAt": "2024-10-10T09:43:11Z"
         }
       ]
     },
@@ -236,9 +250,9 @@
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
-      "body": "## Notes\r\n\r\n\r\n- can problem details use normative language WRT identity fields (e.",
+      "body": "## Notes\r\n\r\n\r\n- can problem details use normative language WRT identity fields? \r\n- We can clarify that IF you send a problem-type response, you SHOULD then send an integrity preference field.\r\nThis goes beyond defining a defining a problem-type, as it specifies an associate behavior wrt to the fields that need to be used in conjunciton with it.",
       "createdAt": "2024-07-21T22:35:26Z",
-      "updatedAt": "2024-07-25T09:22:34Z",
+      "updatedAt": "2024-10-10T09:18:10Z",
       "closedAt": null,
       "comments": [
         {
@@ -249,6 +263,22 @@
           "updatedAt": "2024-07-25T09:22:33Z"
         }
       ]
+    },
+    {
+      "number": 16,
+      "id": "I_kwDOMO7RzM6ZrOFd",
+      "title": "Use the `digest` prefix on all problem types",
+      "url": "https://github.com/tus/draft-digest-fields-problem-types/issues/16",
+      "state": "OPEN",
+      "author": "ioggstream",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "## Question\r\n\r\n- Since these problem types only apply to Digest, maybe we could prefix them with `digest-`.\r\n- This will prevent clashes on generic statements such as \"unsupported algorithm\", that may apply to different specs.\r\n\r\nNew names could be:\r\n\r\n- `digest-unsupported-algorithm`\r\n- `digest-invalid-value`\r\n- `digest-mismatching-value`\r\n\r\nIf we want to retain current names, we could at least have `unsupported-digest-algorithm`.",
+      "createdAt": "2024-10-10T09:39:14Z",
+      "updatedAt": "2024-10-10T09:41:28Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
@@ -366,15 +396,15 @@
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
-      "body": "",
+      "body": "## This PR\r\n\r\n- examples\r\n- question: can we use normative language in problem details?",
       "createdAt": "2024-07-21T22:36:07Z",
-      "updatedAt": "2024-07-25T16:32:32Z",
+      "updatedAt": "2024-10-10T09:09:59Z",
       "baseRepository": "tus/draft-digest-fields-problem-types",
       "baseRefName": "main",
       "baseRefOid": "8c1f4c152e8df4e0c17cadf8d1c8da1b6158675c",
       "headRepository": "ioggstream/draft-digest-fields-problem-types",
       "headRefName": "ioggstream-editorial-2",
-      "headRefOid": "ff04ad793bfba858879ef69f4712c6a722c9d194",
+      "headRefOid": "9b738a8b4bef29ecf8fd6bc808a6bb9881386c6e",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -464,6 +494,46 @@
               "updatedAt": "2024-07-25T16:31:58Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOMO7RzM6MpD6z",
+          "commit": {
+            "abbreviatedOid": "9ec20a0"
+          },
+          "author": "ioggstream",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-10T09:01:12Z",
+          "updatedAt": "2024-10-10T09:01:12Z",
+          "comments": [
+            {
+              "originalPosition": 63,
+              "body": "```suggestion\r\n```\r\n\r\nYou're right! Maybe we could consider a way to convey this information in a header: wdyt?",
+              "createdAt": "2024-10-10T09:01:12Z",
+              "updatedAt": "2024-10-10T09:05:58Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMO7RzM6MpJCF",
+          "commit": {
+            "abbreviatedOid": "9b738a8"
+          },
+          "author": "ioggstream",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-10T09:09:18Z",
+          "updatedAt": "2024-10-10T09:09:18Z",
+          "comments": [
+            {
+              "originalPosition": 34,
+              "body": "As you said before, it is needed to reply to an unsupported `Want-*-Digest` request.",
+              "createdAt": "2024-10-10T09:09:18Z",
+              "updatedAt": "2024-10-10T09:09:18Z"
+            }
+          ]
         }
       ]
     },
@@ -491,6 +561,66 @@
       "mergedBy": null,
       "mergeCommit": null,
       "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 15,
+      "id": "PR_kwDOMO7RzM5-MUGU",
+      "title": "Editorial improvements on IANA considerations.",
+      "url": "https://github.com/tus/draft-digest-fields-problem-types/pull/15",
+      "state": "OPEN",
+      "author": "ioggstream",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "## This PR\r\n\r\n- editorial improvements on IANA\r\n- use different linkable sections for each problem type\r\n- reference the problem type definition section",
+      "createdAt": "2024-10-10T09:37:32Z",
+      "updatedAt": "2024-10-10T09:42:25Z",
+      "baseRepository": "tus/draft-digest-fields-problem-types",
+      "baseRefName": "main",
+      "baseRefOid": "8c1f4c152e8df4e0c17cadf8d1c8da1b6158675c",
+      "headRepository": "ioggstream/draft-digest-fields-problem-types",
+      "headRefName": "ioggstream-editorial-3",
+      "headRefOid": "f0c7aef882ffdd25ac3f6bca8b346410d9de8677",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 17,
+      "id": "PR_kwDOMO7RzM5-MfXH",
+      "title": "Fix: #5. Mention intermediaries, fingerprinting in sec.",
+      "url": "https://github.com/tus/draft-digest-fields-problem-types/pull/17",
+      "state": "OPEN",
+      "author": "ioggstream",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "## This PR\r\n\r\n- Mention intermediaries and reference RFC9110\r\n- Mention fingerprinting\r\n- Fix: #5.",
+      "createdAt": "2024-10-10T10:00:37Z",
+      "updatedAt": "2024-10-10T10:00:53Z",
+      "baseRepository": "tus/draft-digest-fields-problem-types",
+      "baseRefName": "main",
+      "baseRefOid": "8c1f4c152e8df4e0c17cadf8d1c8da1b6158675c",
+      "headRepository": "ioggstream/draft-digest-fields-problem-types",
+      "headRefName": "ioggstream-5",
+      "headRefOid": "4546e7ff4fc51cc0a6eea510d5488cc5b0712c4d",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "ioggstream",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "cc: @LPardue ",
+          "createdAt": "2024-10-10T10:00:51Z",
+          "updatedAt": "2024-10-10T10:00:51Z"
+        }
+      ],
       "reviews": []
     }
   ]
