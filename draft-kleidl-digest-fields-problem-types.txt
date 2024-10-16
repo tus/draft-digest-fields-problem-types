@@ -5,8 +5,8 @@
 Network Working Group                                          M. Kleidl
 Internet-Draft                                               Transloadit
 Intended status: Informational                                 L. Pardue
-Expires: 23 January 2025                                      Cloudflare
-                                                            22 July 2024
+Expires: 19 April 2025                                        Cloudflare
+                                                         16 October 2024
 
 
                   HTTP Problem Types for Digest Fields
@@ -46,7 +46,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 23 January 2025.
+   This Internet-Draft will expire on 19 April 2025.
 
 Copyright Notice
 
@@ -72,6 +72,10 @@ Table of Contents
      3.3.  Mismatching Digest Value
    4.  Security Considerations
    5.  IANA Considerations
+     5.1.  Registration of "unsupported-hashing-algorithm" Problem
+           Type
+     5.2.  Registration of "invalid-digest-value" Problem Type
+     5.3.  Registration of "mismatching-digest-value" Problem Type
    6.  Normative References
    Acknowledgments
    Authors' Addresses
@@ -231,8 +235,11 @@ Table of Contents
 
 5.  IANA Considerations
 
-   IANA is asked to register the following entry in the "HTTP Problem
-   Types" registry:
+   IANA is asked to register the following entries in the "HTTP Problem
+   Types" registry at https://www.iana.org/assignments/http-problem-
+   types (https://www.iana.org/assignments/http-problem-types).
+
+5.1.  Registration of "unsupported-hashing-algorithm" Problem Type
 
    Type URI:  https://iana.org/assignments/http-problem-
       types#unsupported-hashing-algorithm
@@ -241,10 +248,9 @@ Table of Contents
 
    Recommended HTTP status code:  400
 
-   Reference:  This document
+   Reference:  Section 3.1 of this document
 
-   IANA is asked to register the following entry in the "HTTP Problem
-   Types" registry:
+5.2.  Registration of "invalid-digest-value" Problem Type
 
    Type URI:  https://iana.org/assignments/http-problem-types#invalid-
       digest-value
@@ -253,10 +259,9 @@ Table of Contents
 
    Recommended HTTP status code:  400
 
-   Reference:  This document
+   Reference:  Section 3.2 of this document
 
-   IANA is asked to register the following entry in the "HTTP Problem
-   Types" registry:
+5.3.  Registration of "mismatching-digest-value" Problem Type
 
    Type URI:  https://iana.org/assignments/http-problem-
       types#mismatching-digest-value
@@ -265,7 +270,7 @@ Table of Contents
 
    Recommended HTTP status code:  400
 
-   Reference:  This document
+   Reference:  Section 3.3 of this document
 
 6.  Normative References
 
