@@ -83,7 +83,7 @@ A server MAY use this problem type if it wants to communicate to the client that
 one of the hashing algorithms referenced in the integrity or integrity preference fields present in the request
 is not supported.
 
-For this problem type, the `unsupported-algorithm` is defined as the only extension member.
+For this problem type, `unsupported-algorithm` is defined as the only extension member.
 It SHOULD be populated in a response using this problem type, with its value being the algorithm key of the unsupported algorithm from the request.
 The response SHOULD include the corresponding integrity preference field to indicate the server's algorithm support and preference.<!-- I am currently not sure whether to use normative language here. -->
 
