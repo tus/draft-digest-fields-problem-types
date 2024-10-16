@@ -148,7 +148,9 @@ Although an error appeared while handling the digest fields, the server may choo
 
 # IANA Considerations
 
-IANA is asked to register the following entry in the "HTTP Problem Types" registry:
+IANA is asked to register the following entries in the "HTTP Problem Types" registry at <https://www.iana.org/assignments/http-problem-types>.
+
+## Registration of "unsupported-hashing-algorithm" Problem Type
 
 Type URI:
 : https://iana.org/assignments/http-problem-types#unsupported-hashing-algorithm
@@ -160,9 +162,9 @@ Recommended HTTP status code:
 : 400
 
 Reference:
-: This document
+: {{unsupported-hashing-algorithm}} of this document
 
-IANA is asked to register the following entry in the "HTTP Problem Types" registry:
+## Registration of "invalid-digest-value" Problem Type
 
 Type URI:
 : https://iana.org/assignments/http-problem-types#invalid-digest-value
@@ -174,9 +176,9 @@ Recommended HTTP status code:
 : 400
 
 Reference:
-: This document
+: {{invalid-digest-value}} of this document
 
-IANA is asked to register the following entry in the "HTTP Problem Types" registry:
+## Registration of "mismatching-digest-value" Problem Type
 
 Type URI:
 : https://iana.org/assignments/http-problem-types#mismatching-digest-value
@@ -188,7 +190,7 @@ Recommended HTTP status code:
 : 400
 
 Reference:
-: This document
+: {{mismatching-digest-value}} of this document
 
 --- back
 
