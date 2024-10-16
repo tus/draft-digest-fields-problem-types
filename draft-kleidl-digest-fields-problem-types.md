@@ -81,25 +81,70 @@ The term "request", "response", "intermediary", "sender", and "server" are from 
 
 ## Unsupported Hashing Algorithm
 
-This section defines the "https://iana.org/assignments/http-problem-types#unsupported-hashing-algorithm" problem type. A server MAY use this problem type when responding to a request, whose integrity or integrity preference fields reference a hashing algorithm that the server can not or does not want to support for this request, and if the server wants to indicate this problem to the sender.
+This section defines the "https://iana.org/assignments/http-problem-types#unsupported-hashing-algorithm" problem type.
+A server MAY use this problem type if it wants to communicate to the client that
+one of the hashing algorithms referenced in the integrity or integrity preference fields present in the request
+is not supported.
 
-For this problem type, the `unsupported-algorithm` is defined as the only extension member. It SHOULD be populated in a response using this problem type, with its value being the algorithm key of the unsupported algorithm from the request. The response SHOULD include the corresponding integrity preference field to indicate the server's algorithm support and preference.
+For this problem type, `unsupported-algorithm` is defined as the only extension member.
+It SHOULD be populated in a response using this problem type, with its value being the algorithm key of the unsupported algorithm from the request.
+The response can include the corresponding integrity preference field to indicate the server's algorithm support and preference.
 
-The following example shows a response for a request with an integrity field utilizing an unsupported hashing algorithm `foo`. The response also includes a list of supported algorithms.
+Example:
+
+~~~ http-message
+POST /books HTTP/1.1
+Host: foo.example
+Content-Type: application/json
+Accept: application/json
+Accept-Encoding: identity
+Repr-Digest: sha-256=:mEkdbO7Srd9LIOegftO0aBX+VPTVz7/CSHes2Z27gc4=:
+
+{"title": "New Title"}
+~~~
+{: title="A request with a sha-256 integrity field, which is not supported by the server"}
 
 ~~~ http-message
 HTTP/1.1 400 Bad Request
 Content-Type: application/problem+json
-Want-Content-Digest: sha-512=3, sha-256=10
+Want-Repr-Digest: sha-512=10, sha-256=0
 
 {
   "type": "https://iana.org/assignments/http-problem-types#unsupported-hashing-algorithm",
-  "title": "hashing algorithm is not supported",
-  "unsupported-algorithm": "foo"
+  "title": "Unsupported hashing algorithm",
+  "unsupported-algorithm": "sha-256"
 }
 ~~~
+{: title="Response Advertising the Supported Algorithms"}
 
-This problem type is a hint to the client about algorithm support, which the client could use to retry the request with a different algorithm supported by the server.
+
+This problem type is a hint to the client about algorithm support, which the client could use to retry the request with a different, supported, algorithm.
+
+Note that a request may contain more than one integrity field.
+This problem type can also be used when a request contains an integrity preference field, e.g.
+
+~~~ http-message
+GET /items/123 HTTP/1.1
+Host: foo.example
+Want-Repr-Digest: sha=10
+
+~~~
+{: title="GET Request with Want-Repr-Digest"}
+
+~~~ http-message
+HTTP/1.1 400 Bad Request
+Content-Type: application/problem+json
+
+{
+  "type": "https://iana.org/assignments/http-problem-types#unsupported-hashing-algorithm",
+  "title": "Unsupported hashing algorithm",
+  "unsupported-algorithm": "sha"
+}
+~~~
+{: title="Response Advertising the Supported Algorithms"}
+
+
+
 
 ## Invalid Digest Value
 
