@@ -1225,23 +1225,78 @@ interpreted as described in <span>[<a href="#PROBLEM" class="cite xref">PROBLEM<
         <h3 id="name-unsupported-hashing-algorit">
 <a href="#section-3.1" class="section-number selfRef">3.1. </a><a href="#name-unsupported-hashing-algorit" class="section-name selfRef">Unsupported Hashing Algorithm</a>
         </h3>
-<p id="section-3.1-1">This section defines the "https://iana.org/assignments/http-problem-types#unsupported-hashing-algorithm" problem type. A server <span class="bcp14">MAY</span> use this problem type when responding to a request, whose integrity or integrity preference fields reference a hashing algorithm that the server can not or does not want to support for this request, and if the server wants to indicate this problem to the sender.<a href="#section-3.1-1" class="pilcrow">¶</a></p>
-<p id="section-3.1-2">For this problem type, the <code>unsupported-algorithm</code> is defined as the only extension member. It <span class="bcp14">SHOULD</span> be populated in a response using this problem type, with its value being the algorithm key of the unsupported algorithm from the request. The response <span class="bcp14">SHOULD</span> include the corresponding integrity preference field to indicate the server's algorithm support and preference.<a href="#section-3.1-2" class="pilcrow">¶</a></p>
-<p id="section-3.1-3">The following example shows a response for a request with an integrity field utilizing an unsupported hashing algorithm <code>foo</code>. The response also includes a list of supported algorithms.<a href="#section-3.1-3" class="pilcrow">¶</a></p>
-<div class="lang-http-message sourcecode" id="section-3.1-4">
+<p id="section-3.1-1">This section defines the "https://iana.org/assignments/http-problem-types#unsupported-hashing-algorithm" problem type.
+A server <span class="bcp14">MAY</span> use this problem type if it wants to communicate to the client that
+one of the hashing algorithms referenced in the integrity or integrity preference fields present in the request
+is not supported.<a href="#section-3.1-1" class="pilcrow">¶</a></p>
+<p id="section-3.1-2">For this problem type, <code>unsupported-algorithm</code> is defined as the only extension member.
+It <span class="bcp14">SHOULD</span> be populated in a response using this problem type, with its value being the algorithm key of the unsupported algorithm from the request.
+The response can include the corresponding integrity preference field to indicate the server's algorithm support and preference.<a href="#section-3.1-2" class="pilcrow">¶</a></p>
+<p id="section-3.1-3">Example:<a href="#section-3.1-3" class="pilcrow">¶</a></p>
+<span id="name-a-request-with-a-sha-256-in"></span><figure id="figure-1">
+          <div class="lang-http-message sourcecode" id="section-3.1-4.1">
+<pre>
+POST /books HTTP/1.1
+Host: foo.example
+Content-Type: application/json
+Accept: application/json
+Accept-Encoding: identity
+Repr-Digest: sha-256=:mEkdbO7Srd9LIOegftO0aBX+VPTVz7/CSHes2Z27gc4=:
+
+{"title": "New Title"}
+</pre>
+</div>
+<figcaption><a href="#figure-1" class="selfRef">Figure 1</a>:
+<a href="#name-a-request-with-a-sha-256-in" class="selfRef">A request with a sha-256 integrity field, which is not supported by the server</a>
+          </figcaption></figure>
+<span id="name-response-advertising-the-su"></span><figure id="figure-2">
+          <div class="lang-http-message sourcecode" id="section-3.1-5.1">
 <pre>
 HTTP/1.1 400 Bad Request
 Content-Type: application/problem+json
-Want-Content-Digest: sha-512=3, sha-256=10
+Want-Repr-Digest: sha-512=10, sha-256=0
 
 {
   "type": "https://iana.org/assignments/http-problem-types#unsupported-hashing-algorithm",
-  "title": "hashing algorithm is not supported",
-  "unsupported-algorithm": "foo"
+  "title": "Unsupported hashing algorithm",
+  "unsupported-algorithm": "sha-256"
 }
-</pre><a href="#section-3.1-4" class="pilcrow">¶</a>
+</pre>
 </div>
-<p id="section-3.1-5">This problem type is a hint to the client about algorithm support, which the client could use to retry the request with a different algorithm supported by the server.<a href="#section-3.1-5" class="pilcrow">¶</a></p>
+<figcaption><a href="#figure-2" class="selfRef">Figure 2</a>:
+<a href="#name-response-advertising-the-su" class="selfRef">Response Advertising the Supported Algorithms</a>
+          </figcaption></figure>
+<p id="section-3.1-6">This problem type is a hint to the client about algorithm support, which the client could use to retry the request with a different, supported, algorithm.<a href="#section-3.1-6" class="pilcrow">¶</a></p>
+<p id="section-3.1-7">Note that a request may contain more than one integrity field.
+This problem type can also be used when a request contains an integrity preference field, e.g.<a href="#section-3.1-7" class="pilcrow">¶</a></p>
+<span id="name-get-request-with-want-repr-"></span><figure id="figure-3">
+          <div class="lang-http-message sourcecode" id="section-3.1-8.1">
+<pre>
+GET /items/123 HTTP/1.1
+Host: foo.example
+Want-Repr-Digest: sha=10
+
+</pre>
+</div>
+<figcaption><a href="#figure-3" class="selfRef">Figure 3</a>:
+<a href="#name-get-request-with-want-repr-" class="selfRef">GET Request with Want-Repr-Digest</a>
+          </figcaption></figure>
+<span id="name-response-advertising-the-sup"></span><figure id="figure-4">
+          <div class="lang-http-message sourcecode" id="section-3.1-9.1">
+<pre>
+HTTP/1.1 400 Bad Request
+Content-Type: application/problem+json
+
+{
+  "type": "https://iana.org/assignments/http-problem-types#unsupported-hashing-algorithm",
+  "title": "Unsupported hashing algorithm",
+  "unsupported-algorithm": "sha"
+}
+</pre>
+</div>
+<figcaption><a href="#figure-4" class="selfRef">Figure 4</a>:
+<a href="#name-response-advertising-the-sup" class="selfRef">Response Advertising the Supported Algorithms</a>
+          </figcaption></figure>
 </section>
 </div>
 <div id="invalid-digest-value">
