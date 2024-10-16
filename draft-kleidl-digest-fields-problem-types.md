@@ -85,7 +85,7 @@ is not supported.
 
 For this problem type, `unsupported-algorithm` is defined as the only extension member.
 It SHOULD be populated in a response using this problem type, with its value being the algorithm key of the unsupported algorithm from the request.
-The response SHOULD include the corresponding integrity preference field to indicate the server's algorithm support and preference.<!-- I am currently not sure whether to use normative language here. -->
+The response can include the corresponding integrity preference field to indicate the server's algorithm support and preference.
 
 Example:
 
