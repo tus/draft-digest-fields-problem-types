@@ -36,6 +36,7 @@ normative:
   DIGEST: RFC9530
   PROBLEM: RFC9457
   STRUCTURED-FIELDS: RFC8941
+  HTTP: RFC9110
 
 informative:
 
@@ -73,6 +74,8 @@ interpreted as described in {{DIGEST}}.
 
 The term "problem type" in this document is to be
 interpreted as described in {{PROBLEM}}.
+
+The term "request", "response", "intermediary", "sender", and "server" are from {{HTTP}}.
 
 # Problem Types
 
@@ -144,7 +147,12 @@ If the sender receives this problem type, the request might be modified unintent
 
 # Security Considerations
 
-Although an error appeared while handling the digest fields, the server may choose to not disclose this error to the sender to avoid lacking implementation details. Similar, the server may choose a general problem type for the response even in a more specific problem type is defined if it prefers to hide the details of the error from the sender.
+Disclosing error details could leak information
+such as the presence of intermediaries or the server's implementation details.
+Moreover, they can be used to fingerprint the server.
+
+To mitigate these risks, a server could assess the risk of disclosing error details
+and prefer a general problem type over a more specific one.
 
 # IANA Considerations
 
