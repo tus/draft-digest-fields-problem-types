@@ -208,8 +208,19 @@ Table of Contents
    The server SHOULD include a human-readable description why the value
    is considered invalid in the title member.
 
-   The following example shows a response for a request with an invalid
-   digest value.
+   The following example shows a request with the content {"hello":
+   "world"} (plus LF), but the digest has been truncated.  The
+   subsequent response indicates the invalid SHA-512 digest.
+
+   PUT /items/123 HTTP/1.1
+   Host: foo.example
+   Content-Type: application/json
+   Repr-Digest: sha-512=:YMAam51Jz/jOATT6/zvHrLVgOYTGFy1d6GJiOHTohq4:
+
+   {"hello": "world"}
+
+      Figure 5: A request with a sha-512 integrity field, whose digest
+                             has been truncated
 
    HTTP/1.1 400 Bad Request
    Content-Type: application/problem+json
@@ -218,6 +229,8 @@ Table of Contents
      "type": "https://iana.org/assignments/http-problem-types#invalid-digest-value",
      "title": "digest value for sha-512 is not 64 bytes long"
    }
+
+    Figure 6: Response indicating that the provided digest is too short
 
    This problem type indicates a fault in the sender's calculation or
    encoding of the digest value.  A retry of the same request without
@@ -240,8 +253,20 @@ Table of Contents
    the calculated digest.  The digest values MUST BE serialized as byte
    sequences as described in Section 4.1.8 of [STRUCTURED-FIELDS].
 
-   The following example shows a response for a request with a
-   mismatching SHA-256 digest value.
+   The following example shows a request with the content {"hello":
+   "woXYZ"} (plus LF), but the representation digest for {"hello":
+   "world"} (plus LF).  The subsequent response indicates the
+   mismatching SHA-256 digest values.
+
+   PUT /items/123 HTTP/1.1
+   Host: foo.example
+   Content-Type: application/json
+   Repr-Digest: sha-256=:RK/0qy18MlBSVnWgjwz6lZEWjP/lF5HF9bvEF8FabDg=:
+
+   {"hello": "woXYZ"}
+
+       Figure 7: A request with a sha-256 integrity field, which does
+                        not match the representation
 
    HTTP/1.1 400 Bad Request
    Content-Type: application/problem+json
@@ -251,8 +276,10 @@ Table of Contents
      "title": "digest value fromr request does not match expected value",
      "algorithm": "sha-256",
      "provided-digest": ":RK/0qy18MlBSVnWgjwz6lZEWjP/lF5HF9bvEF8FabDg=:",
-     "calculated-digest": ":d435Qo+nKZ+gLcUHn7GQtQ72hiBVAgqoLsZnZPiTGPk=:"
+     "calculated-digest": ":8vXo+0QVwf2woEblm4hTAftp0/K5fWSMZG4CKtplwjc=:"
    }
+
+           Figure 8: Response indicating the mismatching digests
 
    If the sender receives this problem type, the request might be
    modified unintentionally by an intermediary.  The sender could use
