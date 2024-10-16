@@ -85,7 +85,7 @@ Table of Contents
    [DIGEST] by design does not define, require or recommend any specific
    behavior for error handling relating to integrity.  The
    responsibility is instead delegated to applications.  This draft
-   defines a set of problem types [PROBLEM] that can be used by server
+   defines a set of problem types ([PROBLEM]) that can be used by server
    applications to indicate that a problem was encountered while dealing
    with a request carrying integrity fields and integrity preference
    fields.
@@ -169,11 +169,11 @@ Table of Contents
 
    This problem type is a hint to the client about algorithm support,
    which the client could use to retry the request with a different,
-   supported, algorithm.
+   supported, algorithm.  Note that a request may contain more than one
+   integrity field.
 
-   Note that a request may contain more than one integrity field.  This
-   problem type can also be used when a request contains an integrity
-   preference field, e.g.
+   This problem type can also be used when a request contains an
+   integrity preference field.  For example:
 
    GET /items/123 HTTP/1.1
    Host: foo.example
