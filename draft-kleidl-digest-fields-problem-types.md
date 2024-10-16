@@ -49,7 +49,7 @@ This document specifies problem types that servers can use in responses to probl
 
 # Introduction
 
-{{DIGEST}} by design does not define, require or recommend any specific behavior for error handling relating to integrity. The responsibility is instead delegated to applications. This draft defines a set of problem types {{PROBLEM}} that can be used by server applications to indicate that a problem was encountered while dealing with a request carrying integrity fields and integrity preference fields.
+{{DIGEST}} by design does not define, require or recommend any specific behavior for error handling relating to integrity. The responsibility is instead delegated to applications. This draft defines a set of problem types ({{PROBLEM}}) that can be used by server applications to indicate that a problem was encountered while dealing with a request carrying integrity fields and integrity preference fields.
 
 For example, a request message may include content alongside `Content-Digest` and `Repr-Digest` fields that use a digest algorithm the server does not support. An application could decide to reject this request because it cannot validate the integrity. Using a problem type, the server can provide machine-readable error details to aid debugging or error reporting, as shown in the following example.
 
@@ -119,9 +119,9 @@ Want-Repr-Digest: sha-512=10, sha-256=0
 
 
 This problem type is a hint to the client about algorithm support, which the client could use to retry the request with a different, supported, algorithm.
-
 Note that a request may contain more than one integrity field.
-This problem type can also be used when a request contains an integrity preference field, e.g.
+
+This problem type can also be used when a request contains an integrity preference field. For example:
 
 ~~~ http-message
 GET /items/123 HTTP/1.1
@@ -142,9 +142,6 @@ Content-Type: application/problem+json
 }
 ~~~
 {: title="Response Advertising the Supported Algorithms"}
-
-
-
 
 ## Invalid Digest Value
 
@@ -176,7 +173,6 @@ Content-Type: application/problem+json
 {: title="Response indicating that the provided digest is too short"}
 
 This problem type indicates a fault in the sender's calculation or encoding of the digest value. A retry of the same request without modification will likely not yield a successful response.
-
 
 ## Mismatching Digest Value
 
