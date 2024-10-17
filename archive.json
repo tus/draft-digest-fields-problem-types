@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-10-15T00:34:15.152474+00:00",
+  "timestamp": "2024-10-17T00:33:44.241432+00:00",
   "repo": "tus/draft-digest-fields-problem-types",
   "labels": [
     {
@@ -143,15 +143,15 @@
       "id": "I_kwDOMO7RzM6Oz3yO",
       "title": "This may reveal information about intermediaries",
       "url": "https://github.com/tus/draft-digest-fields-problem-types/issues/5",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "LPardue",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": ".. and that might need a security consideration",
       "createdAt": "2024-07-08T15:35:54Z",
-      "updatedAt": "2024-07-08T15:35:54Z",
-      "closedAt": null,
+      "updatedAt": "2024-10-16T15:04:35Z",
+      "closedAt": "2024-10-16T15:04:35Z",
       "comments": []
     },
     {
@@ -190,15 +190,15 @@
       "id": "I_kwDOMO7RzM6QVuBr",
       "title": "Add complete request-response examples",
       "url": "https://github.com/tus/draft-digest-fields-problem-types/issues/8",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "ioggstream",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "## I expect\r\n\r\n- add complete request-response examples\r\n\r\n## Instead \r\n\r\n- only responses are present",
       "createdAt": "2024-07-21T21:44:18Z",
-      "updatedAt": "2024-07-25T09:46:04Z",
-      "closedAt": null,
+      "updatedAt": "2024-10-16T15:40:41Z",
+      "closedAt": "2024-10-16T15:40:40Z",
       "comments": [
         {
           "author": "Acconut",
@@ -206,6 +206,13 @@
           "body": "Opened https://github.com/tus/draft-digest-fields-problem-types/pull/14 to address this.",
           "createdAt": "2024-07-25T09:46:04Z",
           "updatedAt": "2024-07-25T09:46:04Z"
+        },
+        {
+          "author": "Acconut",
+          "authorAssociation": "MEMBER",
+          "body": "Done in #14 and #13.",
+          "createdAt": "2024-10-16T15:40:40Z",
+          "updatedAt": "2024-10-16T15:40:40Z"
         }
       ]
     },
@@ -245,15 +252,15 @@
       "id": "I_kwDOMO7RzM6QVx9Y",
       "title": "Unsupported algorithm's feedback",
       "url": "https://github.com/tus/draft-digest-fields-problem-types/issues/12",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "ioggstream",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "## Notes\r\n\r\n\r\n- can problem details use normative language WRT identity fields? \r\n- We can clarify that IF you send a problem-type response, you SHOULD then send an integrity preference field.\r\nThis goes beyond defining a defining a problem-type, as it specifies an associate behavior wrt to the fields that need to be used in conjunciton with it.",
       "createdAt": "2024-07-21T22:35:26Z",
-      "updatedAt": "2024-10-10T09:18:10Z",
-      "closedAt": null,
+      "updatedAt": "2024-10-16T15:28:35Z",
+      "closedAt": "2024-10-16T15:28:34Z",
       "comments": [
         {
           "author": "Acconut",
@@ -261,6 +268,13 @@
           "body": "Can you expand on this point a bit?",
           "createdAt": "2024-07-25T09:22:33Z",
           "updatedAt": "2024-07-25T09:22:33Z"
+        },
+        {
+          "author": "Acconut",
+          "authorAssociation": "MEMBER",
+          "body": "All of these points were addressed in https://github.com/tus/draft-digest-fields-problem-types/pull/13.",
+          "createdAt": "2024-10-16T15:28:35Z",
+          "updatedAt": "2024-10-16T15:28:35Z"
         }
       ]
     },
@@ -276,7 +290,47 @@
       "labels": [],
       "body": "## Question\r\n\r\n- Since these problem types only apply to Digest, maybe we could prefix them with `digest-`.\r\n- This will prevent clashes on generic statements such as \"unsupported algorithm\", that may apply to different specs.\r\n\r\nNew names could be:\r\n\r\n- `digest-unsupported-algorithm`\r\n- `digest-invalid-value`\r\n- `digest-mismatching-value`\r\n\r\nIf we want to retain current names, we could at least have `unsupported-digest-algorithm`.",
       "createdAt": "2024-10-10T09:39:14Z",
-      "updatedAt": "2024-10-10T09:41:28Z",
+      "updatedAt": "2024-10-16T15:45:02Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "Acconut",
+          "authorAssociation": "MEMBER",
+          "body": "That's a good idea and makes the naming more consistent. I'll open a PR for this.",
+          "createdAt": "2024-10-16T15:45:01Z",
+          "updatedAt": "2024-10-16T15:45:01Z"
+        }
+      ]
+    },
+    {
+      "number": 18,
+      "id": "I_kwDOMO7RzM6agruM",
+      "title": "Unsupported algorithm: one or all?",
+      "url": "https://github.com/tus/draft-digest-fields-problem-types/issues/18",
+      "state": "OPEN",
+      "author": "Acconut",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "The draft currently says (emphasis mine):\r\n\r\n> This section defines the \"https://iana.org/assignments/http-problem-types#unsupported-hashing-algorithm\" problem type. A server MAY use this problem type if it wants to communicate to the client that **one** of the hashing algorithms referenced in the integrity or integrity preference fields present in the request is not supported.\r\n\r\nIn https://github.com/tus/draft-digest-fields-problem-types/pull/13#discussion_r1691777434, @ioggstream mentioned that we might want to change it to say\r\n\r\n> A server MAY use this problem type if it wants to communicate to the client that **none** of the hashing algorithms referenced in the integrity or integrity preference fields present in the request is not supported.\r\n\r\nHow should a server react if it receives integrity fields with unsupported and supported algorithms? The server might ignore the unsupported algorithms and handle just the supported ones. Or it might return this problem type and reject the request entirely. \r\n\r\nOr should this problem type only be used of none of the requested algorithms are supported?",
+      "createdAt": "2024-10-16T15:34:37Z",
+      "updatedAt": "2024-10-16T15:34:37Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 20,
+      "id": "I_kwDOMO7RzM6ahG2j",
+      "title": "Problem type if the server does not want to compute digests",
+      "url": "https://github.com/tus/draft-digest-fields-problem-types/issues/20",
+      "state": "OPEN",
+      "author": "Acconut",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "Let's assume that the server receives a request including an integrity field and content. While the server recognizes the presence of an integrity digest, it is not interested in using the digest to verify the integrity of the message content. For example because it wants to save computational cost associated with computing integrity digests.\r\n\r\nThe server could ignore the integrity fields and process the request without them. However, the client then has no knowledge that the server ignores the digests and cannot distinguish between cases where the server successfully verified the integrity and where the server ignored the digest altogether. This scenario is not always ideal because integrity may be violated without the server raising an error and thus the client believes no violation occurred.\r\n\r\nThe server could also choose to reject the request saying that it acknowledges the presence of the integrity fields but cannot guarantee integrity because it doesn't check the digests. The client can then decide to resend the request without integrity fields knowing that the content's integrity isn't verified or to abort the operation if integrity is of high importance.\r\n\r\nIf the server chooses to do the latter, can it use the unsupported algorithm problem type even if there is no algorithm that the server would accept? Should we introduce a new problem types for this situation?\r\n\r\n",
+      "createdAt": "2024-10-16T16:11:17Z",
+      "updatedAt": "2024-10-16T16:11:18Z",
       "closedAt": null,
       "comments": []
     }
@@ -391,25 +445,35 @@
       "id": "PR_kwDOMO7RzM52Blbr",
       "title": "Unsupported algos",
       "url": "https://github.com/tus/draft-digest-fields-problem-types/pull/13",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "ioggstream",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "## This PR\r\n\r\n- examples\r\n- question: can we use normative language in problem details?",
       "createdAt": "2024-07-21T22:36:07Z",
-      "updatedAt": "2024-10-10T09:09:59Z",
+      "updatedAt": "2024-10-16T15:34:48Z",
       "baseRepository": "tus/draft-digest-fields-problem-types",
       "baseRefName": "main",
       "baseRefOid": "8c1f4c152e8df4e0c17cadf8d1c8da1b6158675c",
       "headRepository": "ioggstream/draft-digest-fields-problem-types",
       "headRefName": "ioggstream-editorial-2",
-      "headRefOid": "9b738a8b4bef29ecf8fd6bc808a6bb9881386c6e",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
-      "comments": [],
+      "headRefOid": "abbf5c71294fa4a8bd2d46a4013253e18e4fc7a1",
+      "closedAt": "2024-10-16T15:28:57Z",
+      "mergedAt": "2024-10-16T15:28:57Z",
+      "mergedBy": "Acconut",
+      "mergeCommit": {
+        "oid": "193daf22df17d2590bfb769bd3530e75325ede8d"
+      },
+      "comments": [
+        {
+          "author": "Acconut",
+          "authorAssociation": "MEMBER",
+          "body": "Thank you for the PR!",
+          "createdAt": "2024-10-16T15:28:53Z",
+          "updatedAt": "2024-10-16T15:28:53Z"
+        }
+      ],
       "reviews": [
         {
           "id": "PRR_kwDOMO7RzM6DDNoV",
@@ -534,6 +598,98 @@
               "updatedAt": "2024-10-10T09:09:18Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOMO7RzM6Nbjt_",
+          "commit": {
+            "abbreviatedOid": "9b738a8"
+          },
+          "author": "Acconut",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-16T15:09:50Z",
+          "updatedAt": "2024-10-16T15:24:15Z",
+          "comments": [
+            {
+              "originalPosition": 8,
+              "body": "```suggestion\r\nA server MAY use this problem type if it wants to communicate to the client that\r\none of the hashing algorithms referenced in the integrity or integrity preference fields present in the request\r\nis not supported.\r\n```",
+              "createdAt": "2024-10-16T15:09:50Z",
+              "updatedAt": "2024-10-16T15:24:15Z"
+            },
+            {
+              "originalPosition": 11,
+              "body": "```suggestion\r\nFor this problem type, `unsupported-algorithm` is defined as the only extension member.\r\n```",
+              "createdAt": "2024-10-16T15:10:22Z",
+              "updatedAt": "2024-10-16T15:24:15Z"
+            },
+            {
+              "originalPosition": 34,
+              "body": "That's right, we still need it for that.",
+              "createdAt": "2024-10-16T15:24:03Z",
+              "updatedAt": "2024-10-16T15:24:15Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMO7RzM6Nbxat",
+          "commit": {
+            "abbreviatedOid": "5ee4e7f"
+          },
+          "author": "Acconut",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-16T15:27:34Z",
+          "updatedAt": "2024-10-16T15:27:34Z",
+          "comments": [
+            {
+              "originalPosition": 13,
+              "body": "```suggestion\r\nThe response can include the corresponding integrity preference field to indicate the server's algorithm support and preference.\r\n```",
+              "createdAt": "2024-10-16T15:27:34Z",
+              "updatedAt": "2024-10-16T15:27:34Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMO7RzM6Nbxiz",
+          "commit": {
+            "abbreviatedOid": "5ee4e7f"
+          },
+          "author": "Acconut",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-16T15:27:46Z",
+          "updatedAt": "2024-10-16T15:27:46Z",
+          "comments": [
+            {
+              "originalPosition": 13,
+              "body": "Alright, then let's drop the normative language for now.",
+              "createdAt": "2024-10-16T15:27:46Z",
+              "updatedAt": "2024-10-16T15:27:47Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMO7RzM6Nb3Nn",
+          "commit": {
+            "abbreviatedOid": "fba3606"
+          },
+          "author": "Acconut",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-16T15:34:48Z",
+          "updatedAt": "2024-10-16T15:34:48Z",
+          "comments": [
+            {
+              "originalPosition": 7,
+              "body": "Opened https://github.com/tus/draft-digest-fields-problem-types/issues/18 to track this question.",
+              "createdAt": "2024-10-16T15:34:48Z",
+              "updatedAt": "2024-10-16T15:34:48Z"
+            }
+          ]
         }
       ]
     },
@@ -542,24 +698,26 @@
       "id": "PR_kwDOMO7RzM52cR6n",
       "title": "Add requests to examples",
       "url": "https://github.com/tus/draft-digest-fields-problem-types/pull/14",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "Acconut",
       "authorAssociation": "MEMBER",
       "assignees": [],
       "labels": [],
       "body": "In response to the feedback from https://github.com/tus/draft-digest-fields-problem-types/issues/8. I didn't touch the examples for unsupported hashing algorithms, because @ioggstream already does so in #13.",
       "createdAt": "2024-07-25T09:45:38Z",
-      "updatedAt": "2024-07-25T09:45:38Z",
+      "updatedAt": "2024-10-16T15:36:03Z",
       "baseRepository": "tus/draft-digest-fields-problem-types",
       "baseRefName": "main",
       "baseRefOid": "8c1f4c152e8df4e0c17cadf8d1c8da1b6158675c",
       "headRepository": "tus/draft-digest-fields-problem-types",
       "headRefName": "req-res",
       "headRefOid": "3fe92928f16f494e775b0e14cceb52572af93712",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2024-10-16T15:36:03Z",
+      "mergedAt": "2024-10-16T15:36:03Z",
+      "mergedBy": "Acconut",
+      "mergeCommit": {
+        "oid": "34ff9fba008aa159d62713ab6e8caed07d971401"
+      },
       "comments": [],
       "reviews": []
     },
@@ -568,50 +726,68 @@
       "id": "PR_kwDOMO7RzM5-MUGU",
       "title": "Editorial improvements on IANA considerations.",
       "url": "https://github.com/tus/draft-digest-fields-problem-types/pull/15",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "ioggstream",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "## This PR\r\n\r\n- editorial improvements on IANA\r\n- use different linkable sections for each problem type\r\n- reference the problem type definition section",
       "createdAt": "2024-10-10T09:37:32Z",
-      "updatedAt": "2024-10-10T09:42:25Z",
+      "updatedAt": "2024-10-16T15:00:45Z",
       "baseRepository": "tus/draft-digest-fields-problem-types",
       "baseRefName": "main",
       "baseRefOid": "8c1f4c152e8df4e0c17cadf8d1c8da1b6158675c",
       "headRepository": "ioggstream/draft-digest-fields-problem-types",
       "headRefName": "ioggstream-editorial-3",
       "headRefOid": "f0c7aef882ffdd25ac3f6bca8b346410d9de8677",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2024-10-16T15:00:45Z",
+      "mergedAt": "2024-10-16T15:00:45Z",
+      "mergedBy": "Acconut",
+      "mergeCommit": {
+        "oid": "2e1d0d636be16280540a7ba2ae29d4324e1c4c3b"
+      },
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOMO7RzM6Nbdj9",
+          "commit": {
+            "abbreviatedOid": "f0c7aef"
+          },
+          "author": "Acconut",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "Thank you!",
+          "createdAt": "2024-10-16T15:00:34Z",
+          "updatedAt": "2024-10-16T15:00:34Z",
+          "comments": []
+        }
+      ]
     },
     {
       "number": 17,
       "id": "PR_kwDOMO7RzM5-MfXH",
       "title": "Fix: #5. Mention intermediaries, fingerprinting in sec.",
       "url": "https://github.com/tus/draft-digest-fields-problem-types/pull/17",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "ioggstream",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "## This PR\r\n\r\n- Mention intermediaries and reference RFC9110\r\n- Mention fingerprinting\r\n- Fix: #5.",
       "createdAt": "2024-10-10T10:00:37Z",
-      "updatedAt": "2024-10-10T10:00:53Z",
+      "updatedAt": "2024-10-16T15:04:34Z",
       "baseRepository": "tus/draft-digest-fields-problem-types",
       "baseRefName": "main",
       "baseRefOid": "8c1f4c152e8df4e0c17cadf8d1c8da1b6158675c",
       "headRepository": "ioggstream/draft-digest-fields-problem-types",
       "headRefName": "ioggstream-5",
       "headRefOid": "4546e7ff4fc51cc0a6eea510d5488cc5b0712c4d",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2024-10-16T15:04:34Z",
+      "mergedAt": "2024-10-16T15:04:34Z",
+      "mergedBy": "Acconut",
+      "mergeCommit": {
+        "oid": "e93b1d3f9377164b8fdfc04fc3328e043779c60b"
+      },
       "comments": [
         {
           "author": "ioggstream",
@@ -621,6 +797,46 @@
           "updatedAt": "2024-10-10T10:00:51Z"
         }
       ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOMO7RzM6NbgNO",
+          "commit": {
+            "abbreviatedOid": "4546e7f"
+          },
+          "author": "Acconut",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "Thank you!",
+          "createdAt": "2024-10-16T15:04:28Z",
+          "updatedAt": "2024-10-16T15:04:28Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 19,
+      "id": "PR_kwDOMO7RzM5-2fZ-",
+      "title": "Use `digest-` prefix for problem types",
+      "url": "https://github.com/tus/draft-digest-fields-problem-types/pull/19",
+      "state": "OPEN",
+      "author": "Acconut",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "Closes https://github.com/tus/draft-digest-fields-problem-types/issues/16.",
+      "createdAt": "2024-10-16T15:49:38Z",
+      "updatedAt": "2024-10-16T15:49:38Z",
+      "baseRepository": "tus/draft-digest-fields-problem-types",
+      "baseRefName": "main",
+      "baseRefOid": "34ff9fba008aa159d62713ab6e8caed07d971401",
+      "headRepository": "tus/draft-digest-fields-problem-types",
+      "headRefName": "prefix",
+      "headRefOid": "c0957e59355f67e39a03f693734753e6c17d3144",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
       "reviews": []
     }
   ]
