@@ -31,6 +31,12 @@ author:
     fullname: "Lucas Pardue"
     organization: Cloudflare
     email: "lucas@lucaspardue.com"
+ -
+    ins: R. Polli
+    fullname: "Roberto Polli"
+    organization: Par-Tec
+    email: "robipolli@gmail.com"
+    country: Italy
 
 normative:
   DIGEST: RFC9530
