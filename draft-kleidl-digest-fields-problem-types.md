@@ -31,6 +31,12 @@ author:
     fullname: "Lucas Pardue"
     organization: Cloudflare
     email: "lucas@lucaspardue.com"
+ -
+    ins: R. Polli
+    fullname: "Roberto Polli"
+    organization: Par-Tec
+    email: "robipolli@gmail.com"
+    country: Italy
 
 normative:
   DIGEST: RFC9530
@@ -264,8 +270,3 @@ Reference:
 : {{mismatching-digest-value}} of this document
 
 --- back
-
-# Acknowledgments
-{:numbered="false"}
-
-This document is based on ideas from a discussion with Roberto Polli, so thanks to him for his valuable input and feedback on this topic.
