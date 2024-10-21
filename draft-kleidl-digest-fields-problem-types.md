@@ -270,8 +270,3 @@ Reference:
 : {{mismatching-digest-value}} of this document
 
 --- back
-
-# Acknowledgments
-{:numbered="false"}
-
-This document is based on ideas from a discussion with Roberto Polli, so thanks to him for his valuable input and feedback on this topic.
