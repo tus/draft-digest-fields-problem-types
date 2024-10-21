@@ -8,7 +8,7 @@ on:
     inputs:
       email:
         description: "Submitter email"
-        default: ""
+        default: "marius@transloadit.com"
         type: string
 
 jobs:
