@@ -5,8 +5,10 @@
 Network Working Group                                          M. Kleidl
 Internet-Draft                                               Transloadit
 Intended status: Informational                                 L. Pardue
-Expires: 19 April 2025                                        Cloudflare
-                                                         16 October 2024
+Expires: 24 April 2025                                        Cloudflare
+                                                                R. Polli
+                                                                 Par-Tec
+                                                         21 October 2024
 
 
                   HTTP Problem Types for Digest Fields
@@ -46,7 +48,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 19 April 2025.
+   This Internet-Draft will expire on 24 April 2025.
 
 Copyright Notice
 
@@ -77,7 +79,6 @@ Table of Contents
      5.2.  Registration of "invalid-digest-value" Problem Type
      5.3.  Registration of "mismatching-digest-value" Problem Type
    6.  Normative References
-   Acknowledgments
    Authors' Addresses
 
 1.  Introduction
@@ -364,11 +365,6 @@ Table of Contents
               HTTP", RFC 8941, DOI 10.17487/RFC8941, February 2021,
               <https://www.rfc-editor.org/rfc/rfc8941>.
 
-Acknowledgments
-
-   This document is based on ideas from a discussion with Roberto Polli,
-   so thanks to him for his valuable input and feedback on this topic.
-
 Authors' Addresses
 
    Marius Kleidl
@@ -379,3 +375,9 @@ Authors' Addresses
    Lucas Pardue
    Cloudflare
    Email: lucas@lucaspardue.com
+
+
+   Roberto Polli
+   Par-Tec
+   Italy
+   Email: robipolli@gmail.com
