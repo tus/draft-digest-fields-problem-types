@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-10-20T00:37:30.979259+00:00",
+  "timestamp": "2024-10-22T00:34:23.472483+00:00",
   "repo": "tus/draft-digest-fields-problem-types",
   "labels": [
     {
@@ -283,15 +283,15 @@
       "id": "I_kwDOMO7RzM6ZrOFd",
       "title": "Use the `digest` prefix on all problem types",
       "url": "https://github.com/tus/draft-digest-fields-problem-types/issues/16",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "ioggstream",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "## Question\r\n\r\n- Since these problem types only apply to Digest, maybe we could prefix them with `digest-`.\r\n- This will prevent clashes on generic statements such as \"unsupported algorithm\", that may apply to different specs.\r\n\r\nNew names could be:\r\n\r\n- `digest-unsupported-algorithm`\r\n- `digest-invalid-value`\r\n- `digest-mismatching-value`\r\n\r\nIf we want to retain current names, we could at least have `unsupported-digest-algorithm`.",
       "createdAt": "2024-10-10T09:39:14Z",
-      "updatedAt": "2024-10-16T15:45:02Z",
-      "closedAt": null,
+      "updatedAt": "2024-10-21T07:30:51Z",
+      "closedAt": "2024-10-21T07:30:51Z",
       "comments": [
         {
           "author": "Acconut",
@@ -314,7 +314,7 @@
       "labels": [],
       "body": "The draft currently says (emphasis mine):\r\n\r\n> This section defines the \"https://iana.org/assignments/http-problem-types#unsupported-hashing-algorithm\" problem type. A server MAY use this problem type if it wants to communicate to the client that **one** of the hashing algorithms referenced in the integrity or integrity preference fields present in the request is not supported.\r\n\r\nIn https://github.com/tus/draft-digest-fields-problem-types/pull/13#discussion_r1691777434, @ioggstream mentioned that we might want to change it to say\r\n\r\n> A server MAY use this problem type if it wants to communicate to the client that **none** of the hashing algorithms referenced in the integrity or integrity preference fields present in the request is not supported.\r\n\r\nHow should a server react if it receives integrity fields with unsupported and supported algorithms? The server might ignore the unsupported algorithms and handle just the supported ones. Or it might return this problem type and reject the request entirely. \r\n\r\nOr should this problem type only be used of none of the requested algorithms are supported?",
       "createdAt": "2024-10-16T15:34:37Z",
-      "updatedAt": "2024-10-18T14:22:24Z",
+      "updatedAt": "2024-10-21T07:48:27Z",
       "closedAt": null,
       "comments": [
         {
@@ -323,6 +323,13 @@
           "body": "Thinking it twice, the server is free to ignore any algorithm, even if supported.\r\n\r\nThe server could explicitly mention in the response if (none|one) of the provided algorithms triggered the error.",
           "createdAt": "2024-10-18T14:22:22Z",
           "updatedAt": "2024-10-18T14:22:22Z"
+        },
+        {
+          "author": "Acconut",
+          "authorAssociation": "MEMBER",
+          "body": "> Thinking it twice, the server is free to ignore any algorithm, even if supported.\r\n\r\nI agree. In that case we can keep the text as it is right now and close this issue. Does that sound good to you?",
+          "createdAt": "2024-10-21T07:48:25Z",
+          "updatedAt": "2024-10-21T07:48:25Z"
         }
       ]
     },
@@ -826,24 +833,26 @@
       "id": "PR_kwDOMO7RzM5-2fZ-",
       "title": "Use `digest-` prefix for problem types",
       "url": "https://github.com/tus/draft-digest-fields-problem-types/pull/19",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "Acconut",
       "authorAssociation": "MEMBER",
       "assignees": [],
       "labels": [],
       "body": "Closes https://github.com/tus/draft-digest-fields-problem-types/issues/16.",
       "createdAt": "2024-10-16T15:49:38Z",
-      "updatedAt": "2024-10-16T15:49:38Z",
+      "updatedAt": "2024-10-21T07:30:50Z",
       "baseRepository": "tus/draft-digest-fields-problem-types",
       "baseRefName": "main",
       "baseRefOid": "34ff9fba008aa159d62713ab6e8caed07d971401",
       "headRepository": "tus/draft-digest-fields-problem-types",
       "headRefName": "prefix",
       "headRefOid": "c0957e59355f67e39a03f693734753e6c17d3144",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2024-10-21T07:30:50Z",
+      "mergedAt": "2024-10-21T07:30:50Z",
+      "mergedBy": "Acconut",
+      "mergeCommit": {
+        "oid": "fb4a58bf3af0c4dfe4f576152902cd03694b8e4a"
+      },
       "comments": [],
       "reviews": []
     },
@@ -852,26 +861,42 @@
       "id": "PR_kwDOMO7RzM5_HHUp",
       "title": "Add @ioggstream as an author.",
       "url": "https://github.com/tus/draft-digest-fields-problem-types/pull/21",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "ioggstream",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "## This PR\r\n\r\n- adds @ioggstream as author\r\n\r\n## Notes\r\n\r\n@Acconut thanks for the invitation!",
       "createdAt": "2024-10-18T14:16:28Z",
-      "updatedAt": "2024-10-18T14:16:29Z",
+      "updatedAt": "2024-10-21T07:30:07Z",
       "baseRepository": "tus/draft-digest-fields-problem-types",
       "baseRefName": "main",
       "baseRefOid": "a901271bc05f807a8225d50e6f7aee0a797de4a0",
       "headRepository": "ioggstream/draft-digest-fields-problem-types",
       "headRefName": "ioggstream-author",
-      "headRefOid": "b8e19021697f493dcaf99d153035e18866df341e",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "9cd23ab1ab6c8bb8e887f870358a351954187e6c",
+      "closedAt": "2024-10-21T07:30:07Z",
+      "mergedAt": "2024-10-21T07:30:07Z",
+      "mergedBy": "Acconut",
+      "mergeCommit": {
+        "oid": "d785d8784d3ddc7d8de61cb162c1d6393f986dcc"
+      },
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOMO7RzM6N7bdU",
+          "commit": {
+            "abbreviatedOid": "9cd23ab"
+          },
+          "author": "Acconut",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "Thank you for helping with this :)",
+          "createdAt": "2024-10-21T07:30:00Z",
+          "updatedAt": "2024-10-21T07:30:00Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
