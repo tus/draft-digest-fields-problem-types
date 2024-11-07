@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-11-05T00:33:39.576503+00:00",
+  "timestamp": "2024-11-07T00:33:30.822660+00:00",
   "repo": "tus/draft-digest-fields-problem-types",
   "labels": [
     {
@@ -47,6 +47,11 @@
       "name": "wontfix",
       "description": "This will not be worked on",
       "color": "ffffff"
+    },
+    {
+      "name": "editorial",
+      "description": "",
+      "color": "FBCA04"
     }
   ],
   "issues": [
@@ -225,10 +230,12 @@
       "author": "ioggstream",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
-      "labels": [],
+      "labels": [
+        "editorial"
+      ],
       "body": "## I expect\r\n\r\n- inherit examples from https://www.rfc-editor.org/rfc/rfc9530.html",
       "createdAt": "2024-07-21T21:46:01Z",
-      "updatedAt": "2024-10-10T09:43:12Z",
+      "updatedAt": "2024-11-05T13:17:18Z",
       "closedAt": null,
       "comments": [
         {
@@ -307,15 +314,15 @@
       "id": "I_kwDOMO7RzM6agruM",
       "title": "Unsupported algorithm: one or all?",
       "url": "https://github.com/tus/draft-digest-fields-problem-types/issues/18",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "Acconut",
       "authorAssociation": "MEMBER",
       "assignees": [],
       "labels": [],
       "body": "The draft currently says (emphasis mine):\r\n\r\n> This section defines the \"https://iana.org/assignments/http-problem-types#unsupported-hashing-algorithm\" problem type. A server MAY use this problem type if it wants to communicate to the client that **one** of the hashing algorithms referenced in the integrity or integrity preference fields present in the request is not supported.\r\n\r\nIn https://github.com/tus/draft-digest-fields-problem-types/pull/13#discussion_r1691777434, @ioggstream mentioned that we might want to change it to say\r\n\r\n> A server MAY use this problem type if it wants to communicate to the client that **none** of the hashing algorithms referenced in the integrity or integrity preference fields present in the request is not supported.\r\n\r\nHow should a server react if it receives integrity fields with unsupported and supported algorithms? The server might ignore the unsupported algorithms and handle just the supported ones. Or it might return this problem type and reject the request entirely. \r\n\r\nOr should this problem type only be used of none of the requested algorithms are supported?",
       "createdAt": "2024-10-16T15:34:37Z",
-      "updatedAt": "2024-10-21T07:48:27Z",
-      "closedAt": null,
+      "updatedAt": "2024-11-05T13:18:22Z",
+      "closedAt": "2024-11-05T13:18:22Z",
       "comments": [
         {
           "author": "ioggstream",
