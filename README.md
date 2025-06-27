@@ -1,3 +1,5 @@
+> ⚠️ This repository has moved to [ietf-wg-httpapi/digest-fields-problem-types](https://github.com/ietf-wg-httpapi/digest-fields-problem-types).
+
 # HTTP Problem Types for Digest Fields
 
 This is the working area for the individual Internet-Draft, "HTTP Problem Types for Digest Fields".
